@@ -2,7 +2,17 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { FetchObjType, UseFetchReturnType } from "@/types";
+
+export interface FetchObjType {
+  url: string;
+  debounceTime?: number;
+}
+
+export interface UseFetchReturnType {
+  loading: boolean;
+  data: any;
+  error: boolean;
+}
 
 const useFetch: (urlData: FetchObjType) => UseFetchReturnType = ({
   url,
@@ -16,10 +26,10 @@ const useFetch: (urlData: FetchObjType) => UseFetchReturnType = ({
     (url &&
       axios
         .get(url)
-        .then((res) => console.log(res))
+        .then(({ data }) => setData(data))
         .catch(() => setError(true))
         .finally(() => setLoading(false))) ||
-      console.log("loading...");
+      console.log("NO_URL_DETECTED");
   };
 
   useEffect(() => {

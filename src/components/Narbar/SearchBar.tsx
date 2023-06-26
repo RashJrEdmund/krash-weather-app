@@ -4,6 +4,7 @@ import useFetch from "@/hooks/useFetch";
 import React from "react";
 import { API_KEY } from "../../services/constants";
 import { FetchObjType } from "@/types";
+import Location from "./Location";
 
 type Props = {};
 export default function SearchBar({}: Props) {
@@ -27,10 +28,21 @@ export default function SearchBar({}: Props) {
     logText(data);
   };
 
+  console.log(data);
+
   return (
-    <div>
-      Search bar
-      <input type="text" placeholder="search url" onChange={handleFetch} />
+    <div className="searchbar">
+      <div>
+        Search bar
+        <input
+          type="text"
+          placeholder="search location"
+          onChange={handleFetch}
+        />
+      </div>
+      {data?.map((location: any) => (
+        <Location key={location.lat + "-" + location.lon} location={location} />
+      ))}
     </div>
   );
 }
