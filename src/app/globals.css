@@ -26,11 +26,13 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+*/
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  border: 0;
+  /* border: 0; */
 }
 
 button {
@@ -45,4 +47,22 @@ ul {
 
 a {
   text-decoration: none;
-} */
+}
+
+@keyframes SearchLoading {
+  0% {
+    transform: rotate(10deg);
+  }
+  25% {
+    transform: rotate(160deg);
+  }
+  50% {
+    transform: rotate(250deg);
+  }
+  75% {
+    transform: rotate(300deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
