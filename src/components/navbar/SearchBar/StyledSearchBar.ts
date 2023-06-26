@@ -3,31 +3,15 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 
-// interface StyledProps {
-//   color?: string;
-//   padd?: string;
-//   bg?: string;
-//   fill?: boolean;
-//   weight?: string | number;
-//   size?: string;
-//   index?: string;
-//   margin?: string;
-//   loading?: boolean;
-//   error?: boolean | any;
-//   align?: string;
-//   maxW?: boolean | string;
-//   opacity?: string;
-// }
-
-function generateContent({ loading }) {
-  if (loading) {
+function generateContent({ fetching }: { fetching: boolean }) {
+  if (fetching) {
     return css`
       content: "";
     `;
   }
 }
 
-const StyledSearchBar = styled.div`
+const StyledSearchBar = styled.div<{ fetching: boolean }>`
   .search_bar {
     background-color: transparent;
     width: fit-content;

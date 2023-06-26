@@ -18,11 +18,16 @@ export default function SearchBar({}: Props) {
     console.log({ [`${data}`]: data });
   };
 
+  const handleInput = ({ target: { value } }: any) => {
+    if (!value.trim()) setLoading(false);
+    setSearchVal(value);
+  };
+
   const handleFetch = () => {
     if (!searchVal.trim()) return;
 
     setLoading(true);
-    const url = `http://api.openweathermap.org/geo/1.0/direct?q=${searchVal}&limit=5&appid=${API_KEY}`;
+    const url = `http://api.openweathermap.org/geo/1.0/direct?q=${searchVal}&limit=10&appid=${API_KEY}`;
     getData(url)
       .then((res) => setData(res))
       .finally(() => setLoading(false));
@@ -32,7 +37,7 @@ export default function SearchBar({}: Props) {
   React.useEffect(() => {
     const intId = setTimeout(() => {
       handleFetch();
-    }, 1000);
+    }, 900);
 
     return () => clearInterval(intId);
   }, [searchVal]);
@@ -40,13 +45,13 @@ export default function SearchBar({}: Props) {
   console.log(data);
 
   return (
-    <StyledSearchBar loading={loading}>
+    <StyledSearchBar fetching={loading}>
       <div className="search_bar">
         <StyledSearchIcon />
         <input
           type="text"
           placeholder="search location"
-          onChange={({ target: { value } }) => setSearchVal(value)}
+          onChange={handleInput}
         />
       </div>
 

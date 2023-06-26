@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
 import { API_KEY } from "../services/constants";
 import getData from "@/api/GetData";
 
@@ -23,7 +23,7 @@ export const WeatherContextProvider = ({ children }: Props) => {
     getData(url)
       .then((data) => setWeatherData(data))
       .catch((err) => setError(err));
-    console.log("getting data for", lon, lat);
+    console.log("getting data for", lon, lat, weatherData);
   };
 
   const logText = (data: any) => {
