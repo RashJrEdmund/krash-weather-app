@@ -67,7 +67,7 @@ const StyledSearchBar = styled.div<{ fetching: boolean }>`
     margin: 1rem 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
   }
 `;

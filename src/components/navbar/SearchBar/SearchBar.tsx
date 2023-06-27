@@ -27,7 +27,7 @@ export default function SearchBar({}: Props) {
     if (!searchVal.trim()) return;
 
     setLoading(true);
-    const url = `http://api.openweathermap.org/geo/1.0/direct?q=${searchVal}&limit=10&appid=${API_KEY}`;
+    const url = `http://api.openweathermap.org/geo/1.0/direct?q=${searchVal}&limit=5&appid=${API_KEY}`;
     getData(url)
       .then((res) => setData(res))
       .finally(() => setLoading(false));
