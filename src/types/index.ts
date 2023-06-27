@@ -8,3 +8,7 @@ export interface UseFetchReturnType {
   data: any;
   error: boolean;
 }
+
+export interface StyledProps {
+  showMenu?: boolean;
+}

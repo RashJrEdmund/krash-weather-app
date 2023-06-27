@@ -4,7 +4,7 @@ import React from "react";
 import { API_KEY } from "../../../services/constants";
 import Location from "./Location";
 import StyledSearchBar from "./StyledSearchBar";
-import { StyledSearchIcon } from "../../Icons";
+import { SearchIcon } from "../../Icons";
 import getData from "@/api/GetData";
 
 type Props = {};
@@ -52,7 +52,7 @@ export default function SearchBar({}: Props) {
           placeholder="search location"
           onChange={handleInput}
         />
-        <StyledSearchIcon />
+        <SearchIcon />
       </div>
 
       <div className="show_locations">

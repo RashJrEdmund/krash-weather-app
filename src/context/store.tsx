@@ -21,6 +21,7 @@ type Props = {
 export const WeatherContextProvider = ({ children }: Props) => {
   const [weatherData, setWeatherData] = React.useState<any>(null);
   const [error, setError] = React.useState<boolean>(false);
+  const [showMenu, setShowMenu] = React.useState<boolean>(false);
 
   const getWeather = (lon: string | number, lat: string | number) => {
     if (!lon || !lat) return;
@@ -38,7 +39,9 @@ export const WeatherContextProvider = ({ children }: Props) => {
   };
 
   return (
-    <AppContext.Provider value={{ weatherData, getWeather, logText, error }}>
+    <AppContext.Provider
+      value={{ weatherData, getWeather, logText, error, showMenu, setShowMenu }}
+    >
       {children}
     </AppContext.Provider>
   );

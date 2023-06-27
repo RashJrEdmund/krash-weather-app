@@ -24,6 +24,11 @@ const StyledWeather = styled.div`
       font-weight: 600;
       letter-spacing: 2px;
       margin: 10px 0 4rem;
+      white-space: nowrap;
+      flex-direction: row;
+      gap: 5px;
+      align-items: center;
+      width: fit-content;
     }
 
     .temp {
@@ -70,6 +75,10 @@ const StyledWeather = styled.div`
         white-space: nowrap;
       }
     }
+  }
+
+  @media only screen and (max-width: 600px) {
+    flex-direction: column;
   }
 `;
 

@@ -6,6 +6,7 @@ import NavBar from "@/components/navbar/NavBar";
 import Sidebar from "@/components/sidebar/Sidebar";
 import StyledHome from "./StyledHome";
 import Weather from "@/components/weather/Weather";
+import { useWeatherContext } from "@/context/store";
 // import img from "../images/img 6.jpeg";
 
 // const SlidData: string[] = ["img 1", "img 2"];
@@ -25,8 +26,10 @@ export default function Home() {
   //   });
   // };
 
+  const { showMenu } = useWeatherContext();
+
   return (
-    <StyledHome>
+    <StyledHome showMenu={showMenu}>
       <div className="main_col_1">
         <section className="display_section">
           <NavBar />
