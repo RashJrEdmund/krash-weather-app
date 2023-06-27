@@ -12,22 +12,31 @@ function generateContent({ fetching }: { fetching: boolean }) {
 }
 
 const StyledSearchBar = styled.div<{ fetching: boolean }>`
+  background-color: transparent;
+  position: relative;
+
   .search_bar {
+    position: relative;
     background-color: transparent;
+    background-color: gold;
     width: fit-content;
+    width: min(300px, 57vw);
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
 
     input {
-      width: min(250px, 57vw);
+      width: 100%;
       min-height: 30px;
-      margin: 0 0 0 10px;
       padding: 5px;
+
+      &:focus {
+        outline: none;
+      }
     }
 
-    &::after {
+    &::before {
       ${generateContent}
       border-top: 10px solid #ffba51;
       border-bottom: 10px solid green;
@@ -37,6 +46,18 @@ const StyledSearchBar = styled.div<{ fetching: boolean }>`
 
       animation: SearchLoading 0.6s linear infinite;
     }
+  }
+
+  .show_locations {
+    background-color: transparent;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 `;
 

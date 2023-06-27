@@ -47,21 +47,23 @@ export default function SearchBar({}: Props) {
   return (
     <StyledSearchBar fetching={loading}>
       <div className="search_bar">
-        <StyledSearchIcon />
         <input
           type="text"
           placeholder="search location"
           onChange={handleInput}
         />
+        <StyledSearchIcon />
       </div>
 
-      {searchVal.trim() &&
-        data?.map((location: any) => (
-          <Location
-            key={location.lat + "-" + location.lon}
-            location={location}
-          />
-        ))}
+      <div className="show_locations">
+        {searchVal.trim() &&
+          data?.map((location: any) => (
+            <Location
+              key={location.lat + "-" + location.lon}
+              location={location}
+            />
+          ))}
+      </div>
     </StyledSearchBar>
   );
 }

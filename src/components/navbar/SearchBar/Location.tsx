@@ -8,20 +8,27 @@ const StyledLocation = styled.div`
   color: #292148;
   height: fit-content;
   width: fit-content;
-  width: min(300px, 97vw);
+  min-width: min(300px, 97vw);
   padding: 10px;
   margin: 10px 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: space-between;
+  cursor: pointer;
   gap: 10px;
+  border-radius: 5px;
 
   p {
-    width: 100%;
+    width: fit-content;
     height: fit-content;
-    cursor: pointer;
     margin: 0;
     padding: 0;
     white-space: nowrap;
+
+    &.state,
+    &.country {
+      font-weight: 600;
+    }
   }
 `;
 
@@ -39,9 +46,11 @@ export default function Location({ location }: Props) {
 
   return (
     <StyledLocation onClick={() => getWeather(location.lon, location.lat)}>
-      <p>{location.name}</p>
-      <p>{location.country}</p>
-      <p>{location.state}</p>
+      <div className="div">
+        <p className="state">{location.state}</p>
+        <p>{location.name}</p>
+      </div>
+      <p className="country">{location.country}</p>
     </StyledLocation>
   );
 }
