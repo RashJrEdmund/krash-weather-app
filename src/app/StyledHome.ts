@@ -5,13 +5,12 @@ import { StyledProps } from "@/types";
 
 const StyledHome = styled.main<StyledProps>`
   background-color: transparent;
-  width: 100%;
+  width: min(100%, 1300px);
   height: fit-content;
-  /* min-height: 100%; */
   max-height: 99vh;
   display: grid;
   grid-template-columns: 1fr 30%;
-  margin: 0;
+  margin: 0 auto;
 
   .main_col_1 {
     display: flex;
@@ -23,7 +22,8 @@ const StyledHome = styled.main<StyledProps>`
     padding: 15px;
 
     .display_section {
-      background-color: green;
+      background-color: #1d2432;
+      padding: 10px;
       width: 100%;
       height: fit-content;
       min-height: 480px;

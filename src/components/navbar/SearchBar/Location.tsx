@@ -5,6 +5,7 @@ import React from "react";
 type Props = { location: any };
 const StyledLocation = styled.div`
   background-color: #feba49;
+  box-shadow: -5px 5px 10px #1d2432;
   color: #292148;
   height: fit-content;
   width: fit-content;

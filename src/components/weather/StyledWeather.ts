@@ -31,6 +31,29 @@ const StyledWeather = styled.div`
       width: fit-content;
     }
 
+    .desc_img {
+      width: 100%;
+      background-color: green;
+
+      .description {
+        margin: 15px 0;
+        font-size: 17px;
+
+        .main {
+          margin: 7px 0;
+          font-size: 20px;
+          font-weight: 600;
+          letter-spacing: 2px;
+          flex-direction: row;
+          gap: 3px;
+
+          &::after {
+            content: " :";
+          }
+        }
+      }
+    }
+
     .temp {
       font-size: 15px;
       margin: 15px 0;
@@ -39,24 +62,6 @@ const StyledWeather = styled.div`
       span {
         font-size: 100px;
         white-space: nowrap;
-      }
-    }
-
-    .description {
-      margin: 15px 0;
-      font-size: 17px;
-
-      .main {
-        margin: 7px 0;
-        font-size: 20px;
-        font-weight: 600;
-        letter-spacing: 2px;
-        flex-direction: row;
-        gap: 3px;
-
-        &::after {
-          content: " :";
-        }
       }
     }
   }
@@ -79,6 +84,12 @@ const StyledWeather = styled.div`
 
   @media only screen and (max-width: 600px) {
     flex-direction: column;
+
+    .desc_img {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
   }
 `;
 

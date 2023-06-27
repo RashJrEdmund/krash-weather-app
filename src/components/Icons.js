@@ -12,7 +12,7 @@ export const SearchIcon = styled(LuSearch)`
   top: 50%;
   transform: translateY(-50%);
   margin: 0 5px;
-  color: #000;
+  color: #feba49;
   font-size: 20px;
 `;
 

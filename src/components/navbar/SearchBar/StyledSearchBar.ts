@@ -26,16 +26,16 @@ const StyledSearchBar = styled.div<{ fetching: boolean }>`
 
     input {
       background-color: transparent;
-      color: #000;
+      color: #feba49;
       font-size: 16px;
       width: min(300px, 57vw);
       min-height: 40px;
       padding: 5px 10px;
-      border: 1px solid #1d2432;
+      border: 1px solid #feba49;
       border-radius: 10px;
 
       &::placeholder {
-        color: #ddd;
+        color: #feba4969;
       }
 
       &:focus {
