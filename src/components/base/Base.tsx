@@ -7,15 +7,23 @@ import StyledBase from "./StyledBase";
 type Props = {};
 
 export default function Base({}: Props) {
-  const { getWeather, weatherData, logText } = useWeatherContext();
+  const { baseData, logText } = useWeatherContext();
 
   React.useEffect(() => {
-    logText(weatherData);
-  }, [weatherData]);
+    logText(baseData);
+  }, [baseData]);
 
-  return <StyledBase>
-    <div className="wind_speed">
-      <h3>Wind</h3>
-    </div>
-  </StyledBase>;
+  return (
+    <StyledBase>
+      {baseData?.map(({ quantity, magnetude, unit }: any) => (
+        <div className="data_col" key={quantity + unit}>
+          <h3 className="quantity">{quantity}</h3>
+          <p className="magnetude">
+            {magnetude}
+            <span>{unit}</span>
+          </p>
+        </div>
+      ))}
+    </StyledBase>
+  );
 }

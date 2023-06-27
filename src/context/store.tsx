@@ -32,10 +32,10 @@ export const WeatherContextProvider = ({ children }: Props) => {
       .then((data) => {
         setWeatherData(data);
         const baseD = [
-          { quantity: "Wind Speed", magnetude: data.wind.speen, unit: "hPa" },
+          { quantity: "Wind Speed", magnetude: data.wind.speen, unit: "m/s" },
           { quantity: "Pressure", magnetude: data.main.pressure, unit: "hPa" },
           { quantity: "Humidity", magnetude: data.main.humidity, unit: "%" },
-          { quantity: "Visibility", magnetude: data.visibility, unit: "" },
+          { quantity: "Visibility", magnetude: data.visibility, unit: "km" },
         ];
 
         setBaseData([...baseD]);
