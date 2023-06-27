@@ -22,9 +22,10 @@ const StyledHome = styled.main<StyledProps>`
     padding: 10px 10px 20px 10px;
 
     .display_section {
-      /* background-color: #1d2432; */
+      border-radius: var(--app-border) 0 0 0;
       background: linear-gradient(to bottom, #00000070, #00000070, #00000070),
         url(${({ url }) => url});
+      box-shadow: 0 0 10px #1d2432;
       background-position: center;
       background-size: cover;
       position: relative;
@@ -41,7 +42,9 @@ const StyledHome = styled.main<StyledProps>`
   }
 
   .main_col_2 {
-    background-color: #1d2432;
+    border-radius: 0 var(--app-border) var(--app-border) 0;
+    box-shadow: 0 0 10px #1d2432;
+    background-color: #0a0c11;
     padding: 10px;
     margin: 10px 10px 20px 0;
     min-height: 90vh;
@@ -51,6 +54,8 @@ const StyledHome = styled.main<StyledProps>`
     grid-template-columns: 1fr;
 
     .main_col_2 {
+      border-radius: 0;
+      background: linear-gradient(to bottom, #0a0c11, #0a0c11af, #f5f5f525);
       padding: 10px;
       padding: 0;
       margin: 0;

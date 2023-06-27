@@ -11,10 +11,6 @@ type Props = {};
 export default function Weather({}: Props) {
   const { weatherData } = useWeatherContext();
 
-  React.useEffect(() => {
-    console.log(weatherData);
-  }, [weatherData]);
-
   return (
     <StyledWeather>
       <div className="weather_col_1">

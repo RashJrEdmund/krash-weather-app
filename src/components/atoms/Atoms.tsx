@@ -9,7 +9,8 @@ export const Styledoverlay = styled.div<StyledProps>`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(to bottom, #1d243264, #1d243264, #1d243264);
+  background-color: #1d243264;
+  opacity: ${({ opacity = "0.3" }) => opacity};
   z-index: ${({ index = 2 }) => index};
 `;
 
@@ -18,9 +19,13 @@ export const Styledoverlay = styled.div<StyledProps>`
 export const Overlay = ({
   action,
   index,
+  opacity,
 }: {
   action: () => any;
   index: number | undefined;
+  opacity: string;
 }) => {
-  return <Styledoverlay index={index} onClick={() => action()} />;
+  return (
+    <Styledoverlay index={index} opacity={opacity} onClick={() => action()} />
+  );
 };

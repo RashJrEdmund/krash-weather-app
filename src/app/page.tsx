@@ -30,7 +30,9 @@ export default function Home() {
 
   return (
     <>
-      {showMenu && <Overlay index={3} action={() => setShowMenu(false)}/>}
+      {showMenu && (
+        <Overlay opacity="0.5" index={3} action={() => setShowMenu(false)} />
+      )}
 
       <StyledHome showMenu={showMenu} url={SlidData[photoIndx]}>
         <div className="main_col_1">

@@ -7,11 +7,7 @@ import StyledBase from "./StyledBase";
 type Props = {};
 
 export default function Base({}: Props) {
-  const { baseData, logText } = useWeatherContext();
-
-  React.useEffect(() => {
-    logText(baseData);
-  }, [baseData]);
+  const { baseData } = useWeatherContext();
 
   return (
     <StyledBase>

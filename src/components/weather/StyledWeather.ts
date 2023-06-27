@@ -16,7 +16,6 @@ const StyledWeather = styled.div`
   }
 
   .weather_col_1 {
-    /* background-color: gold; */
     width: 100%;
 
     .location {
@@ -34,7 +33,6 @@ const StyledWeather = styled.div`
 
     .desc_img {
       width: 100%;
-      /* background-color: green; */
 
       .description {
         margin: 15px 0;

@@ -1,21 +1,34 @@
 "use client";
 
 import React from "react";
-import StyledSideBar from "../StyledSideBar";
+import StyledSubSide from "./StyledSubSide";
+import {
+  BackIcon,
+  NewsIcon,
+  SettingsIcon,
+  UserIcon,
+} from "@/components/atoms/Icons";
 
-type Props = {};
+type Props = { setIndexSide: any };
 
-export default function UserSidebar({}: Props) {
+export default function UserSidebar({ setIndexSide }: Props) {
   return (
-    <StyledSideBar>
-      <h3>User</h3>
+    <StyledSubSide>
+      <h4 title="back" onClick={() => setIndexSide((prev: any) => !prev)}>
+        <BackIcon /> User
+      </h4>
 
       <ul>
-        <li>Search Location</li>
-        <li>News</li>
-        <li>Profile</li>
-        <li>Settings</li>
+        <li title="news">
+          <NewsIcon /> News
+        </li>
+        <li title="profile">
+          <UserIcon /> Profile
+        </li>
+        <li title="settings">
+          <SettingsIcon /> Settings
+        </li>
       </ul>
-    </StyledSideBar>
+    </StyledSubSide>
   );
 }

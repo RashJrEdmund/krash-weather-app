@@ -42,7 +42,7 @@ export const WeatherContextProvider = ({ children }: Props) => {
         setBaseData([...baseD]);
       })
       .catch((err) => setError(err));
-    console.log("getting data for", lon, lat, weatherData);
+    // console.log("getting data for", lon, lat, weatherData);
   };
 
   const logText = (data: any) => {

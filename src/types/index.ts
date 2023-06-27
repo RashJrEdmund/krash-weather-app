@@ -14,4 +14,5 @@ export interface StyledProps {
   url?: string;
   index?: number;
   fetching?: boolean;
+  opacity?: string;
 }
