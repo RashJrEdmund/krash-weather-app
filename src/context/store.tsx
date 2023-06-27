@@ -22,6 +22,7 @@ export const WeatherContextProvider = ({ children }: Props) => {
   const [weatherData, setWeatherData] = React.useState<any>(null);
   const [error, setError] = React.useState<boolean>(false);
   const [showMenu, setShowMenu] = React.useState<boolean>(false);
+  const [showOverlay, setShowOverlay] = React.useState<boolean>(false);
   const [baseData, setBaseData] = React.useState<any>(null);
 
   const getWeather = (lon: string | number, lat: string | number) => {
@@ -60,6 +61,8 @@ export const WeatherContextProvider = ({ children }: Props) => {
         error,
         showMenu,
         setShowMenu,
+        showOverlay,
+        setShowOverlay,
       }}
     >
       {children}

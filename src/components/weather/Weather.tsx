@@ -4,7 +4,7 @@ import { useWeatherContext } from "@/context/store";
 import React from "react";
 import StyledWeather from "./StyledWeather";
 import Image from "next/image";
-import { LocationIcon } from "../Icons";
+import { LocationIcon } from "../atoms/Icons";
 
 type Props = {};
 

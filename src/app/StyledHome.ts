@@ -58,6 +58,7 @@ const StyledHome = styled.main<StyledProps>`
       transition: 0.3s;
       top: 0;
       left: 0;
+      z-index: 5;
       transform: translate(
         ${({ showMenu }) => (showMenu ? "0" : "calc(-100% - 20px)")}
       );

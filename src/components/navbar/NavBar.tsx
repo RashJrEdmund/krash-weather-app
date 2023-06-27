@@ -4,6 +4,7 @@ import React from "react";
 import SearchBar from "./SearchBar/SearchBar";
 import styled from "@emotion/styled";
 import { useWeatherContext } from "@/context/store";
+import { MenuIcon } from "../atoms/Icons";
 
 const StyledNav = styled.nav`
   display: flex;
@@ -13,9 +14,17 @@ const StyledNav = styled.nav`
   width: 100%;
 
   .logo {
-    color: #ffba51;
-    font-size: 25px;
-    font-weight: 600;
+    .krash_text {
+      color: #ffba51;
+      font-size: 25px;
+      font-weight: 600;
+    }
+  }
+
+  @media only screen and (max-width: 950px) {
+    .krash_text {
+      display: none;
+    }
   }
 `;
 
@@ -26,12 +35,9 @@ export default function NavBar({}: Props) {
 
   return (
     <StyledNav>
-      <span
-        className="logo"
-        onClick={() => setShowMenu((prev: any) => !prev)}
-        title="Krash Weather app"
-      >
-        Krash weather
+      <span className="logo" title="Krash Weather app">
+        <MenuIcon onClick={() => setShowMenu((prev: any) => !prev)} />
+        <div className="krash_text">Krash weather</div>
       </span>
       <SearchBar />
     </StyledNav>

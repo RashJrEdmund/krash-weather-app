@@ -12,4 +12,6 @@ export interface UseFetchReturnType {
 export interface StyledProps {
   showMenu?: boolean;
   url?: string;
+  index?: number;
+  fetching?: boolean;
 }

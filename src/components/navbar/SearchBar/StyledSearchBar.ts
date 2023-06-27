@@ -11,7 +11,7 @@ function generateContent({ fetching }: { fetching: boolean }) {
   }
 }
 
-const StyledSearchBar = styled.div<{ fetching: boolean }>`
+const StyledSearchBar = styled.div<{ fetching: boolean; index?: number }>`
   background-color: transparent;
   position: relative;
 
@@ -64,6 +64,7 @@ const StyledSearchBar = styled.div<{ fetching: boolean }>`
     position: absolute;
     right: 0;
     top: 100%;
+    z-index: ${({ index = 4 }) => index};
     margin: 1rem 0;
     display: flex;
     flex-direction: column;

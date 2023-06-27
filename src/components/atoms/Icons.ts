@@ -23,7 +23,12 @@ export const LocationIcon = styled(MdLocationOn)`
 
 export const MenuIcon = styled(MdMenu)`
   color: #000;
-  font-size: 20px;
+  color: #ffba51;
+  font-size: 40px;
+
+  @media only screen and (min-width: 950px) {
+    display: none;
+  }
 `;
 
 export const LoadingIcon = styled(AiOutlineLoading3Quarters)`

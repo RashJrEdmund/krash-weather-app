@@ -4,8 +4,10 @@ import React from "react";
 import { API_KEY } from "../../../services/constants";
 import Location from "./Location";
 import StyledSearchBar from "./StyledSearchBar";
-import { SearchIcon } from "../../Icons";
+import { SearchIcon } from "../../atoms/Icons";
 import getData from "@/api/GetData";
+import { useWeatherContext } from "@/context/store";
+import { Overlay } from "@/components/atoms/Atoms";
 
 type Props = {};
 export default function SearchBar({}: Props) {
@@ -13,9 +15,12 @@ export default function SearchBar({}: Props) {
   const [searchVal, setSearchVal] = React.useState<string>("");
   const [loading, setLoading] = React.useState<boolean>(false);
 
+  const { showOverlay, setShowOverlay } = useWeatherContext();
+
   const handleInput = ({ target: { value } }: any) => {
     if (!value.trim()) setLoading(false);
     setSearchVal(value);
+    setShowOverlay(false);
   };
 
   const handleFetch = () => {
@@ -28,8 +33,11 @@ export default function SearchBar({}: Props) {
       .finally(() => setLoading(false));
   };
 
+  // using a debounce search. waiting 900ms
+
   React.useEffect(() => {
     const intId = setTimeout(() => {
+      searchVal.trim() && setShowOverlay(true); // to ensure that there actually is avalue being fetched
       handleFetch();
     }, 900);
 
@@ -37,25 +45,32 @@ export default function SearchBar({}: Props) {
   }, [searchVal]);
 
   return (
-    <StyledSearchBar fetching={loading}>
-      <div className="search_bar">
-        <input
-          type="text"
-          placeholder="search location"
-          onChange={handleInput}
-        />
-        <SearchIcon />
-      </div>
+    <>
+      {showOverlay && (
+        <Overlay index={2} action={() => setShowOverlay(false)} />
+      )}
 
-      <div className="show_locations">
-        {searchVal.trim() &&
-          data?.map((location: any) => (
-            <Location
-              key={location.lat + "-" + location.lon}
-              location={location}
-            />
-          ))}
-      </div>
-    </StyledSearchBar>
+      <StyledSearchBar fetching={loading}>
+        <div className="search_bar">
+          <input
+            type="text"
+            placeholder="search location"
+            onChange={handleInput}
+          />
+          <SearchIcon />
+        </div>
+
+        <div className="show_locations">
+          {searchVal.trim() &&
+            showOverlay &&
+            data?.map((location: any) => (
+              <Location
+                key={location.lat + "-" + location.lon}
+                location={location}
+              />
+            ))}
+        </div>
+      </StyledSearchBar>
+    </>
   );
 }
