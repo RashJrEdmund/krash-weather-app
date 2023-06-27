@@ -3,13 +3,14 @@ import styled from "@emotion/styled";
 import React from "react";
 
 type Props = { location: any };
+
 const StyledLocation = styled.div`
   background-color: #feba49;
   box-shadow: -5px 5px 10px #1d2432;
   color: #292148;
   height: fit-content;
   width: fit-content;
-  min-width: min(300px, 97vw);
+  min-width: 300px;
   padding: 10px;
   margin: 10px 0;
   display: flex;
@@ -34,6 +35,10 @@ const StyledLocation = styled.div`
         letter-spacing: 2px;
       }
     }
+  }
+
+  @media only screen and (max-width: 400px) {
+    min-width: 250px;
   }
 `;
 

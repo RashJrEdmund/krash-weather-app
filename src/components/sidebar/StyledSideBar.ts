@@ -7,8 +7,12 @@ const StyledSideBar = styled.div`
   color: #ffba51;
   width: 100%;
   height: fit-content;
-  min-height: 100vh;
+  height: 100%;
   padding: 10px;
+
+  @media only screen and (max-width: 950px) {
+    height: 100vh;
+  }
 `;
 
 export default StyledSideBar;

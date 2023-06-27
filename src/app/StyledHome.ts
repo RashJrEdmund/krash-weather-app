@@ -18,8 +18,8 @@ const StyledHome = styled.main<StyledProps>`
     align-items: flex-start;
     justify-content: space-between;
     height: fit-content;
-    min-height: 90%;
-    padding: 15px;
+    min-height: 90vh;
+    padding: 10px;
 
     .display_section {
       background-color: #1d2432;
@@ -36,13 +36,17 @@ const StyledHome = styled.main<StyledProps>`
   }
 
   .main_col_2 {
-    /* background-color: #ffba51; */
+    padding: 10px;
+    min-height: 90vh;
   }
 
-  @media only screen and (max-width: 1000px) {
+  @media only screen and (max-width: 950px) {
     grid-template-columns: 1fr;
 
     .main_col_2 {
+      padding: 10px;
+      background-color: gold;
+      padding: 0;
       position: fixed;
       transition: 0.3s;
       top: 0;
@@ -51,6 +55,7 @@ const StyledHome = styled.main<StyledProps>`
         ${({ showMenu }) => (showMenu ? "0" : "calc(-100% - 20px)")}
       );
       width: max(60%, 300px);
+      min-height: 100vh;
     }
   }
 `;

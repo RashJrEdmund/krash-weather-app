@@ -53,17 +53,6 @@ const StyledWeather = styled.div`
         }
       }
     }
-
-    .temp {
-      font-size: 15px;
-      margin: 15px 0;
-      font-weight: 600;
-
-      span {
-        font-size: 100px;
-        white-space: nowrap;
-      }
-    }
   }
 
   .weather_col_2 {
@@ -78,6 +67,25 @@ const StyledWeather = styled.div`
       span {
         font-size: 100px;
         white-space: nowrap;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 900px) {
+    .desc_img {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .weather_col_2 {
+      .temp {
+        font-size: 15px;
+
+        span {
+          font-size: 60px;
+          white-space: nowrap;
+        }
       }
     }
   }

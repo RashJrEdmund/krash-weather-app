@@ -13,11 +13,6 @@ export default function SearchBar({}: Props) {
   const [searchVal, setSearchVal] = React.useState<string>("");
   const [loading, setLoading] = React.useState<boolean>(false);
 
-  const logText = (data: any) => {
-    console.clear();
-    console.log({ [`${data}`]: data });
-  };
-
   const handleInput = ({ target: { value } }: any) => {
     if (!value.trim()) setLoading(false);
     setSearchVal(value);
@@ -31,7 +26,6 @@ export default function SearchBar({}: Props) {
     getData(url)
       .then((res) => setData(res))
       .finally(() => setLoading(false));
-    logText(data);
   };
 
   React.useEffect(() => {
@@ -41,8 +35,6 @@ export default function SearchBar({}: Props) {
 
     return () => clearInterval(intId);
   }, [searchVal]);
-
-  console.log(data);
 
   return (
     <StyledSearchBar fetching={loading}>

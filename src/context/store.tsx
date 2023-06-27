@@ -22,25 +22,45 @@ export const WeatherContextProvider = ({ children }: Props) => {
   const [weatherData, setWeatherData] = React.useState<any>(null);
   const [error, setError] = React.useState<boolean>(false);
   const [showMenu, setShowMenu] = React.useState<boolean>(false);
+  const [baseData, setBaseData] = React.useState<any>(null);
 
   const getWeather = (lon: string | number, lat: string | number) => {
     if (!lon || !lat) return;
 
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
     getData(url)
-      .then((data) => setWeatherData(data))
+      .then((data) => {
+        setWeatherData(data);
+        const baseD = [
+          { quantity: "Wind Speed", magnetude: data.wind.speen, unit: "hPa" },
+          { quantity: "Pressure", magnetude: data.main.pressure, unit: "hPa" },
+          { quantity: "Humidity", magnetude: data.main.humidity, unit: "%" },
+          { quantity: "Visibility", magnetude: data.visibility, unit: "" },
+        ];
+
+        setBaseData([...baseD]);
+      })
       .catch((err) => setError(err));
     console.log("getting data for", lon, lat, weatherData);
   };
 
   const logText = (data: any) => {
-    console.clear();
-    console.log({ [`${data}`]: data });
+    const { clear, log } = console;
+    clear();
+    log({ [`${data}`]: data });
   };
 
   return (
     <AppContext.Provider
-      value={{ weatherData, getWeather, logText, error, showMenu, setShowMenu }}
+      value={{
+        weatherData,
+        baseData,
+        getWeather,
+        logText,
+        error,
+        showMenu,
+        setShowMenu,
+      }}
     >
       {children}
     </AppContext.Provider>
