@@ -16,10 +16,11 @@ const StyledWeather = styled.div`
   }
 
   .weather_col_1 {
-    background-color: gold;
+    /* background-color: gold; */
     width: 100%;
 
     .location {
+      color: #f5f5f5;
       font-size: 20px;
       font-weight: 600;
       letter-spacing: 2px;
@@ -43,6 +44,7 @@ const StyledWeather = styled.div`
           margin: 7px 0;
           font-size: 20px;
           font-weight: 600;
+          color: #f5f5f5;
           letter-spacing: 2px;
           flex-direction: row;
           gap: 3px;
@@ -50,6 +52,10 @@ const StyledWeather = styled.div`
           &::after {
             content: " :";
           }
+        }
+
+        .exp {
+          color: #ffba51;
         }
       }
     }
@@ -63,10 +69,12 @@ const StyledWeather = styled.div`
       font-size: 15px;
       margin: 15px 0;
       font-weight: 600;
+      color: #ffba51;
 
       span {
         font-size: 100px;
         white-space: nowrap;
+        color: #f5f5f5;
       }
     }
   }

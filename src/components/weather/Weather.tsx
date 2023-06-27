@@ -26,13 +26,16 @@ export default function Weather({}: Props) {
         <div className="desc_img">
           <div className="description">
             <p className="main">{weatherData?.weather[0].main || "Weather"}</p>
-            <p>{weatherData?.weather[0].description || "Description"}</p>
+            <p className="exp">
+              {weatherData?.weather[0].description || "Description"}
+            </p>
           </div>
 
           {weatherData && (
             <Image
               src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
               alt="weather icon"
+              title={`${weatherData?.weather[0].description}`}
               height="160"
               width="180"
             />

@@ -11,4 +11,5 @@ export interface UseFetchReturnType {
 
 export interface StyledProps {
   showMenu?: boolean;
+  url?: string;
 }

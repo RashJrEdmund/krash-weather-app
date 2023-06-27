@@ -11,6 +11,12 @@ const StyledNav = styled.nav`
   align-items: center;
   justify-content: space-between;
   width: 100%;
+
+  .logo {
+    color: #ffba51;
+    font-size: 25px;
+    font-weight: 600;
+  }
 `;
 
 type Props = {};
@@ -20,7 +26,11 @@ export default function NavBar({}: Props) {
 
   return (
     <StyledNav>
-      <span onClick={() => setShowMenu((prev: any) => !prev)}>
+      <span
+        className="logo"
+        onClick={() => setShowMenu((prev: any) => !prev)}
+        title="Krash Weather app"
+      >
         Krash weather
       </span>
       <SearchBar />

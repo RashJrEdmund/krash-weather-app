@@ -47,6 +47,7 @@ button {
   width: fit-content;
   height: fit-content;
   cursor: pointer;
+  background: linear-gradient(to bottom, #feb949fe, #feba49, #feba49);
 }
 
 ul {

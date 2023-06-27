@@ -3,7 +3,7 @@
 import styled from "@emotion/styled";
 
 const StyledBase = styled.section`
-  background: linear-gradient(to bottom, #000000a9, #000000a9, #000000a9);
+  background-color: #0a0c11;
   width: 100%;
   height: fit-content;
   min-height: 200px;

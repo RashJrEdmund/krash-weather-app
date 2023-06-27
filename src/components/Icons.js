@@ -17,7 +17,7 @@ export const SearchIcon = styled(LuSearch)`
 `;
 
 export const LocationIcon = styled(MdLocationOn)`
-  color: #000;
+  color: #ffba51;
   font-size: 20px;
 `;
 

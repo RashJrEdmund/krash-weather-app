@@ -22,11 +22,16 @@ const StyledHome = styled.main<StyledProps>`
     padding: 10px 10px 20px 10px;
 
     .display_section {
-      background-color: #1d2432;
+      /* background-color: #1d2432; */
+      background: linear-gradient(to bottom, #00000070, #00000070, #00000070),
+        url(${({ url }) => url});
+      background-position: center;
+      background-size: cover;
+      position: relative;
       padding: 10px;
       width: 100%;
       height: fit-content;
-      min-height: 50vh;
+      min-height: 65vh;
       display: flex;
       flex-direction: column;
       align-items: flex-start;

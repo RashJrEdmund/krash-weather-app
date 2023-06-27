@@ -5,9 +5,11 @@ import React from "react";
 type Props = { location: any };
 
 const StyledLocation = styled.div`
-  background-color: #feba49;
+  /* background: linear-gradient(to bottom, #feba4637, #feba4637, #feba4637); */
+  background: linear-gradient(to bottom, #1d2432e4, #1d2432e4, #1d2432e4);
   box-shadow: -5px 5px 10px #1d2432;
   color: #292148;
+  color: #fff;
   height: fit-content;
   width: fit-content;
   min-width: 300px;
@@ -55,7 +57,10 @@ export default function Location({ location }: Props) {
   const { getWeather } = useWeatherContext();
 
   return (
-    <StyledLocation onClick={() => getWeather(location.lon, location.lat)}>
+    <StyledLocation
+      onClick={() => getWeather(location.lon, location.lat)}
+      title={`look up ${location.state}`}
+    >
       <div className="div">
         <p className="state">{location.state}</p>
         <p>{location.name}</p>
