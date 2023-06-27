@@ -33,7 +33,7 @@ const StyledWeather = styled.div`
 
     .desc_img {
       width: 100%;
-      background-color: green;
+      /* background-color: green; */
 
       .description {
         margin: 15px 0;
@@ -57,7 +57,7 @@ const StyledWeather = styled.div`
 
   .weather_col_2 {
     width: 100%;
-    background-color: gray;
+    /* background-color: gray; */
 
     .temp {
       font-size: 15px;

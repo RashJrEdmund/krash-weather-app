@@ -3,15 +3,16 @@
 import styled from "@emotion/styled";
 
 const StyledSideBar = styled.div`
-  background-color: #1d2432;
+background-color: transparent;
   color: #ffba51;
   width: 100%;
-  height: fit-content;
   height: 100%;
-  padding: 10px;
+  max-height: calc(90vh + 20px);
 
   @media only screen and (max-width: 950px) {
     height: 100vh;
+    max-height: none;
+    padding: 10px;
   }
 `;
 

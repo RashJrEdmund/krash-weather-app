@@ -6,7 +6,7 @@ const StyledBase = styled.section`
   background: linear-gradient(to bottom, #000000a9, #000000a9, #000000a9);
   width: 100%;
   height: fit-content;
-  min-height: 160px;
+  min-height: 200px;
   margin: 2rem auto 0;
   padding: 17px 10px 20px;
   display: flex;
@@ -26,6 +26,7 @@ const StyledBase = styled.section`
       border-bottom: 1px solid #808080;
       padding: 0 0 9px 0;
       white-space: nowrap;
+      color: #ddd;
     }
 
     .magnetude {
@@ -34,12 +35,13 @@ const StyledBase = styled.section`
       padding: 10px 15px;
       color: #ffba51;
       width: 100%;
-      margin: 10px auto 0;
+      margin: 10px auto;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 7px;
       white-space: nowrap;
+      cursor: pointer;
     }
   }
 

@@ -19,14 +19,14 @@ const StyledHome = styled.main<StyledProps>`
     justify-content: space-between;
     height: fit-content;
     min-height: 90vh;
-    padding: 10px;
+    padding: 10px 10px 20px 10px;
 
     .display_section {
       background-color: #1d2432;
       padding: 10px;
       width: 100%;
       height: fit-content;
-      min-height: 480px;
+      min-height: 50vh;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -36,7 +36,9 @@ const StyledHome = styled.main<StyledProps>`
   }
 
   .main_col_2 {
+    background-color: #1d2432;
     padding: 10px;
+    margin: 10px 10px 20px 0;
     min-height: 90vh;
   }
 
@@ -45,8 +47,8 @@ const StyledHome = styled.main<StyledProps>`
 
     .main_col_2 {
       padding: 10px;
-      background-color: gold;
       padding: 0;
+      margin: 0;
       position: fixed;
       transition: 0.3s;
       top: 0;
