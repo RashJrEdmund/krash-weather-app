@@ -18,18 +18,25 @@ const StyledSearchBar = styled.div<{ fetching: boolean }>`
   .search_bar {
     position: relative;
     background-color: transparent;
-    background-color: gold;
     width: fit-content;
-    width: min(300px, 57vw);
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
 
     input {
-      width: 100%;
-      min-height: 30px;
-      padding: 5px;
+      background-color: transparent;
+      color: #000;
+      font-size: 16px;
+      width: min(300px, 57vw);
+      min-height: 40px;
+      padding: 5px 10px;
+      border: 1px solid #1d2432;
+      border-radius: 10px;
+
+      &::placeholder {
+        color: #ddd;
+      }
 
       &:focus {
         outline: none;
@@ -38,6 +45,10 @@ const StyledSearchBar = styled.div<{ fetching: boolean }>`
 
     &::before {
       ${generateContent}
+      margin: 0;
+      position: absolute;
+      right: calc(100% + 10px);
+      top: calc(25% - 0);
       border-top: 10px solid #ffba51;
       border-bottom: 10px solid green;
       border-right: 10px solid #241e45;

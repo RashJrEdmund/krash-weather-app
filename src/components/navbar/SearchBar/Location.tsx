@@ -28,6 +28,10 @@ const StyledLocation = styled.div`
     &.state,
     &.country {
       font-weight: 600;
+
+      &.country {
+        letter-spacing: 2px;
+      }
     }
   }
 `;

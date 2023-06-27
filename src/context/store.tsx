@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 
 import { createContext, useContext } from "react";
 import { API_KEY } from "../services/constants";
@@ -12,6 +12,12 @@ type Props = {
   children: React.ReactNode;
 };
 
+/*
+ Imperial units: 26 degrees Celsius is equal to 78.8 degrees Fahrenheit.
+ Metric units: 26 degrees Celsius is equal to 26.0 degrees Celsius.
+ Standard units: 26 degrees Celsius is equal to 79.8 degrees Rankine.
+*/
+
 export const WeatherContextProvider = ({ children }: Props) => {
   const [weatherData, setWeatherData] = React.useState<any>(null);
   const [error, setError] = React.useState<boolean>(false);
@@ -19,7 +25,7 @@ export const WeatherContextProvider = ({ children }: Props) => {
   const getWeather = (lon: string | number, lat: string | number) => {
     if (!lon || !lat) return;
 
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
     getData(url)
       .then((data) => setWeatherData(data))
       .catch((err) => setError(err));
