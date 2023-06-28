@@ -1,13 +1,22 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
+*/
 
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --app-border: 10px;
 }
 
+@media only screen and (max-width: 600px) {
+  :root {
+    --app-border: 0;
+  }
+}
+
+/*
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -26,17 +35,27 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+*/
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  border: 0;
+  /* border: 1px solid red; */
+}
+
+body {
+  background-color: #1d243281;
+  margin: 0;
+  padding: 0;
+  color: #000;
 }
 
 button {
   width: fit-content;
   height: fit-content;
   cursor: pointer;
+  background: linear-gradient(to bottom, #feb949fe, #feba49, #feba49);
 }
 
 ul {
@@ -45,4 +64,22 @@ ul {
 
 a {
   text-decoration: none;
+}
+
+@keyframes SearchLoading {
+  0% {
+    transform: rotate(10deg);
+  }
+  25% {
+    transform: rotate(160deg);
+  }
+  50% {
+    transform: rotate(250deg);
+  }
+  75% {
+    transform: rotate(300deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

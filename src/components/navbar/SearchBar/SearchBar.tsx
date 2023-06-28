@@ -1,0 +1,76 @@
+"use client";
+
+import React from "react";
+import { API_KEY } from "../../../services/constants";
+import Location from "./Location";
+import StyledSearchBar from "./StyledSearchBar";
+import { SearchIcon } from "../../atoms/Icons";
+import getData from "@/api/GetData";
+import { useWeatherContext } from "@/context/store";
+import { Overlay } from "@/components/atoms/Atoms";
+
+type Props = {};
+export default function SearchBar({}: Props) {
+  const [data, setData] = React.useState<any>(null);
+  const [searchVal, setSearchVal] = React.useState<string>("");
+  const [loading, setLoading] = React.useState<boolean>(false);
+
+  const { showOverlay, setShowOverlay } = useWeatherContext();
+
+  const handleInput = ({ target: { value } }: any) => {
+    if (!value.trim()) setLoading(false);
+    setSearchVal(value);
+    setShowOverlay(false);
+  };
+
+  const handleFetch = () => {
+    if (!searchVal.trim()) return;
+
+    setLoading(true);
+    const url = `http://api.openweathermap.org/geo/1.0/direct?q=${searchVal}&limit=5&appid=${API_KEY}`;
+    getData(url)
+      .then((res) => setData(res))
+      .finally(() => setLoading(false));
+  };
+
+  // using a debounce search. waiting 900ms
+
+  React.useEffect(() => {
+    const intId = setTimeout(() => {
+      searchVal.trim() && setShowOverlay(true); // to ensure that there actually is avalue being fetched
+      handleFetch();
+    }, 900);
+
+    return () => clearInterval(intId);
+  }, [searchVal]);
+
+  return (
+    <>
+      {showOverlay && (
+        <Overlay index={2} action={() => setShowOverlay(false)} />
+      )}
+
+      <StyledSearchBar fetching={loading}>
+        <div className="search_bar">
+          <input
+            type="text"
+            placeholder="search location"
+            onChange={handleInput}
+          />
+          <SearchIcon />
+        </div>
+
+        <div className="show_locations">
+          {searchVal.trim() &&
+            showOverlay &&
+            data?.map((location: any) => (
+              <Location
+                key={location.lat + "-" + location.lon}
+                location={location}
+              />
+            ))}
+        </div>
+      </StyledSearchBar>
+    </>
+  );
+}
