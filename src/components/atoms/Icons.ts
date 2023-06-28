@@ -27,6 +27,7 @@ export const LocationIcon = styled(MdLocationOn)`
 export const MenuIcon = styled(MdMenu)`
   color: #ffba51;
   font-size: 40px;
+  cursor: pointer;
 
   @media only screen and (min-width: 950px) {
     display: none;

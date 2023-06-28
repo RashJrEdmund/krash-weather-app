@@ -55,7 +55,7 @@ const StyledHome = styled.main<StyledProps>`
 
     .main_col_2 {
       border-radius: 0;
-      background: linear-gradient(to bottom, #0a0c11, #0a0c11af, #f5f5f525);
+      background: linear-gradient(to bottom, #0a0c11, #0a0c11, #0a0c116f);
       padding: 10px;
       padding: 0;
       margin: 0;
