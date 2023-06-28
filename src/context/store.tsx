@@ -5,6 +5,7 @@ import React from "react";
 import { createContext, useContext } from "react";
 import { API_KEY } from "../services/constants";
 import getData from "@/api/GetData";
+import useAlert from "@/hooks/UseAlert";
 
 const AppContext = createContext({});
 
@@ -24,6 +25,8 @@ export const WeatherContextProvider = ({ children }: Props) => {
   const [showMenu, setShowMenu] = React.useState<boolean>(false);
   const [showOverlay, setShowOverlay] = React.useState<boolean>(false);
   const [baseData, setBaseData] = React.useState<any>(null);
+  const { AlertComponent, displayAlert, alertMsg } = useAlert();
+  const customAlert = { AlertComponent, displayAlert, alertMsg };
 
   const getWeather = (lon: string | number, lat: string | number) => {
     if (!lon || !lat) return;
@@ -63,6 +66,7 @@ export const WeatherContextProvider = ({ children }: Props) => {
         setShowMenu,
         showOverlay,
         setShowOverlay,
+        customAlert,
       }}
     >
       {children}

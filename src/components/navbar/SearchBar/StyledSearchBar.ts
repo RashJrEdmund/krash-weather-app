@@ -49,10 +49,10 @@ const StyledSearchBar = styled.div<{ fetching: boolean; index?: number }>`
       position: absolute;
       right: calc(100% + 10px);
       top: calc(25% - 0);
-      border-top: 10px solid #ffba51;
-      border-bottom: 10px solid green;
+      border-top: 10px solid #feba49;
+      border-bottom: 10px solid #feba49;
       border-right: 10px solid #241e45;
-      border-left: 10px solid blue;
+      border-left: 10px solid #241e45;
       border-radius: 50px;
 
       animation: SearchLoading 0.6s linear infinite;

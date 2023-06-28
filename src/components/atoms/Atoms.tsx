@@ -23,7 +23,7 @@ export const Overlay = ({
 }: {
   action: () => any;
   index: number | undefined;
-  opacity: string;
+  opacity?: string;
 }) => {
   return (
     <Styledoverlay index={index} opacity={opacity} onClick={() => action()} />

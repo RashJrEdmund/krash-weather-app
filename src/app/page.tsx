@@ -9,11 +9,13 @@ import Weather from "@/components/weather/Weather";
 import { useWeatherContext } from "@/context/store";
 import { SlidData } from "@/images";
 import { Overlay } from "@/components/atoms/Atoms";
+import useAlert from "@/hooks/UseAlert";
 
 export default function Home() {
   const [photoIndx, setPhotoIndx] = React.useState(0);
 
-  const { showMenu, setShowMenu } = useWeatherContext();
+  const { showMenu, setShowMenu, customAlert } = useWeatherContext();
+  const { alertMsg, AlertComponent } = customAlert;
 
   React.useEffect(() => {
     const intId = setInterval(
@@ -33,6 +35,8 @@ export default function Home() {
       {showMenu && (
         <Overlay opacity="0.5" index={3} action={() => setShowMenu(false)} />
       )}
+
+      {alertMsg.show && <AlertComponent />}
 
       <StyledHome showMenu={showMenu} url={SlidData[photoIndx]}>
         <div className="main_col_1">
