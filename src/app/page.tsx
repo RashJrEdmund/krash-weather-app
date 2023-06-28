@@ -24,7 +24,7 @@ export default function Home() {
           if (prev === SlidData.length - 1) return 0;
           return prev + 1;
         }),
-      10000
+      15000
     );
 
     return () => clearInterval(intId);
