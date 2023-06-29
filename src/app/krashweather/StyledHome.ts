@@ -5,24 +5,33 @@ import { StyledProps } from "@/types";
 
 const StyledHome = styled.main<StyledProps>`
   background-color: transparent;
-  width: min(100%, 1300px);
+  background-color: green;
+  width: min(98%, 1300px);
   height: fit-content;
-  max-height: 99vh;
+  min-height: 95vh;
   display: grid;
-  grid-template-columns: 1fr 30%;
-  margin: 0 auto;
+  grid-template-columns: 25% 1fr 25%;
+  margin: 2rem auto 1rem;
 
-  .main_col_1 {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
-    height: fit-content;
+  .main_left_col {
+    border-radius: var(--app-border) 0 0 var(--app-border);
+    box-shadow: 0 0 10px #1d2432;
+    background-color: #0a0c11;
+    padding: 10px;
+    margin: 0 10px 0 0;
     min-height: 90vh;
-    padding: 10px 10px 20px 10px;
+  }
+
+  .main_mid_col {
+    background-color: brown;
+    min-height: 90vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 30%;
+    justify-content: space-between;
+    align-items: flex-start;
 
     .display_section {
-      border-radius: var(--app-border) 0 0 0;
       background: linear-gradient(to bottom, #00000070, #00000070, #00000070),
         url(${({ url }) => url});
       box-shadow: 0 0 10px #1d2432;
@@ -31,29 +40,29 @@ const StyledHome = styled.main<StyledProps>`
       position: relative;
       padding: 10px;
       width: 100%;
-      height: fit-content;
-      min-height: 65vh;
+      height: 100%;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      justify-content: start;
-      gap: 170px;
+      justify-content: space-between;
+      padding: 10px 10px 70px;
     }
   }
 
-  .main_col_2 {
+  .main_right_col {
     border-radius: 0 var(--app-border) var(--app-border) 0;
     box-shadow: 0 0 10px #1d2432;
     background-color: #0a0c11;
     padding: 10px;
-    margin: 10px 10px 20px 0;
+    margin: 0 0 0 10px;
     min-height: 90vh;
   }
 
   @media only screen and (max-width: 950px) {
     grid-template-columns: 1fr;
 
-    .main_col_2 {
+    .main_left_col,
+    .main_right_col {
       border-radius: 0;
       background: linear-gradient(to bottom, #0a0c11, #0a0c11, #0a0c116f);
       padding: 10px;
@@ -64,11 +73,25 @@ const StyledHome = styled.main<StyledProps>`
       top: 0;
       left: 0;
       z-index: 5;
+      width: max(60%, 300px);
+      min-height: 100vh;
+    }
+
+    .main_left_col {
+      top: 0;
+      right: 0;
+      transform: translate(
+        ${({ showMenu }) => (showMenu ? "0" : "calc(100% + 20px)")}
+      );
+    }
+
+    .main_right_col {
+      top: 0;
+      left: 0;
+      z-index: 5;
       transform: translate(
         ${({ showMenu }) => (showMenu ? "0" : "calc(-100% - 20px)")}
       );
-      width: max(60%, 300px);
-      min-height: 100vh;
     }
   }
 `;

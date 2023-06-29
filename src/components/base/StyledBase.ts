@@ -3,13 +3,14 @@
 import styled from "@emotion/styled";
 
 const StyledBase = styled.section`
-  border-radius: 0 0 0 var(--app-border);
   box-shadow: 0 0 10px #1d2432;
   background-color: #0a0c11;
   width: 100%;
   height: fit-content;
   min-height: 200px;
-  margin: 2rem auto 0;
+  height: 85%;
+  align-self: flex-end;
+  margin: 0 auto;
   padding: 17px 10px 20px;
   display: flex;
   justify-content: space-between;

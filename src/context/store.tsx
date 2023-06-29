@@ -6,6 +6,7 @@ import { createContext, useContext } from "react";
 import { API_KEY } from "../services/constants";
 import getData from "@/api/GetData";
 import useAlert from "@/hooks/UseAlert";
+import { updateDayData } from "@/services/utils";
 
 const AppContext = createContext({});
 
@@ -21,10 +22,14 @@ type Props = {
 
 export const WeatherContextProvider = ({ children }: Props) => {
   const [weatherData, setWeatherData] = React.useState<any>(null);
+  const [baseData, setBaseData] = React.useState<any>(null);
   const [error, setError] = React.useState<boolean>(false);
   const [showMenu, setShowMenu] = React.useState<boolean>(false);
   const [showOverlay, setShowOverlay] = React.useState<boolean>(false);
-  const [baseData, setBaseData] = React.useState<any>(null);
+  const [pathname, setPathname] = React.useState<string>("/");
+  const [day, setDay] = React.useState<number>(0);
+  const [dayData, setDayData] = React.useState<any>(null);
+
   const { AlertComponent, displayAlert, alertMsg } = useAlert();
   const customAlert = { AlertComponent, displayAlert, alertMsg };
 
@@ -39,15 +44,8 @@ export const WeatherContextProvider = ({ children }: Props) => {
       .then((data) => {
         console.clear();
         // setWeatherData(data);
+        updateDayData(data, day, setBaseData);
         console.log("this res", data);
-        // const baseD = [
-        //   { quantity: "Wind Speed", magnetude: data.wind.speed, unit: "m/s" },
-        //   { quantity: "Pressure", magnetude: data.main.pressure, unit: "hPa" },
-        //   { quantity: "Humidity", magnetude: data.main.humidity, unit: "%" },
-        //   { quantity: "Visibility", magnetude: data.visibility, unit: "km" },
-        // ];
-
-        // setBaseData([...baseD]);
       })
       .catch((err) => setError(err));
     // console.log("getting data for", lon, lat, weatherData);
@@ -58,6 +56,10 @@ export const WeatherContextProvider = ({ children }: Props) => {
     clear();
     log({ [`${data}`]: data });
   };
+
+  React.useEffect(() => {
+    weatherData && updateDayData(weatherData, day, setBaseData);
+  }, [day]);
 
   return (
     <AppContext.Provider

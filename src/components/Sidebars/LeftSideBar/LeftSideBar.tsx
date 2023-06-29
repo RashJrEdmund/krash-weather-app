@@ -1,16 +1,14 @@
 "use client";
 
-import React from "react";
-import IndexSide from "./SubSide/IndexSide";
-import UserSidebar from "./SubSide/UserSidebar";
 import { useWeatherContext } from "@/context/store";
 import { useRouter } from "next/navigation";
+import React from "react";
 import StyledSideBar from "../StyledSidBar";
 
 type Props = {};
 
-export default function Sidebar({}: Props) {
-  const [indexSide, setIndexSide] = React.useState<boolean>(true);
+export default function LeftSideBar({}: Props) {
+  const router = useRouter();
 
   const { setShowMenu } = useWeatherContext();
 
@@ -20,11 +18,9 @@ export default function Sidebar({}: Props) {
         Krash Weather app
       </h3>
 
-      {indexSide ? (
-        <IndexSide setIndexSide={setIndexSide} />
-      ) : (
-        <UserSidebar setIndexSide={setIndexSide} />
-      )}
+      <p>3 hour forecast</p>
+
+      <p onClick={() => router.push("krashweather/2")}>Text Navigate</p>
     </StyledSideBar>
   );
 }
