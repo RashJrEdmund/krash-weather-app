@@ -23,7 +23,10 @@ type Props = {
 export const WeatherContextProvider = ({ children }: Props) => {
   const [weatherData, setWeatherData] = React.useState<any>(null);
   const [error, setError] = React.useState<boolean>(false);
-  const [showMenu, setShowMenu] = React.useState<boolean>(false);
+  const [showMenu, setShowMenu] = React.useState<{
+    left: boolean;
+    right: boolean;
+  }>({ left: false, right: false });
   const [showOverlay, setShowOverlay] = React.useState<boolean>(false);
   const [dayTime, setDayTime] = React.useState<{ day: string; time: number }>({
     day: "day_1",

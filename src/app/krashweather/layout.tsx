@@ -44,8 +44,12 @@ export default function Layout({ children }: Props) {
 
   return (
     <>
-      {showMenu && (
-        <Overlay opacity="0.5" index={3} action={() => setShowMenu(false)} />
+      {(showMenu.left || showMenu.right) && (
+        <Overlay
+          opacity="0.5"
+          index={3}
+          action={() => setShowMenu({ left: false, right: false })}
+        />
       )}
 
       {alertMsg.show && <AlertComponent />}

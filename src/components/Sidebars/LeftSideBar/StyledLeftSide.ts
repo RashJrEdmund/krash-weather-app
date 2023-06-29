@@ -28,7 +28,7 @@ const StyledLeftSide = styled(StyledSideBar)`
     }
   }
 
-  @media screen {
+  @media only screen and (max-width: 950px) {
     ul {
       li {
         &:hover {

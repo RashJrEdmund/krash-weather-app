@@ -25,7 +25,7 @@ export default function LeftSideBar({}: Props) {
 
   useEffect(() => {
     if (weatherData) {
-      const hrs = weatherData[`${dayTime.day}`].map((hr) => hr);
+      const hrs = weatherData[`${dayTime.day}`].map((hrObj: any) => hrObj);
 
       setHours(hrs);
 
@@ -35,7 +35,7 @@ export default function LeftSideBar({}: Props) {
 
   return (
     <StyledLeftSide>
-      <h3 onClick={() => setShowMenu((prev: any) => !prev)}>
+      <h3 onClick={() => setShowMenu({ left: false, right: false })}>
         Krash Weather app
       </h3>
 

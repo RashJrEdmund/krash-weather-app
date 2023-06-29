@@ -16,7 +16,7 @@ export default function Sidebar({}: Props) {
 
   return (
     <StyledSideBar>
-      <h3 onClick={() => setShowMenu((prev: any) => !prev)}>
+      <h3 onClick={() => setShowMenu({ left: false, right: false })}>
         Krash Weather app
       </h3>
 

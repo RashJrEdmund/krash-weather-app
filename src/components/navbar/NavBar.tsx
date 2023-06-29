@@ -36,7 +36,7 @@ export default function NavBar({}: Props) {
   return (
     <StyledNav>
       <span className="logo" title="Krash Weather app">
-        <MenuIcon onClick={() => setShowMenu((prev: any) => !prev)} />
+        <MenuIcon onClick={() => setShowMenu({ left: true, right: false })} />
         <div className="krash_text">Krash weather</div>
       </span>
       <SearchBar />

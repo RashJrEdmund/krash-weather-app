@@ -12,6 +12,7 @@ export default function Base({}: Props) {
   const {
     weatherData,
     dayTime,
+    setShowMenu,
     customAlert: { displayAlert },
   } = useWeatherContext();
 
@@ -23,7 +24,7 @@ export default function Base({}: Props) {
 
   return (
     <>
-      <StatsIcon />
+      <StatsIcon onClick={() => setShowMenu({ left: false, right: true })} />
 
       <StyledBase>
         {baseData?.map(({ quantity, magnetude, unit }: any) => (

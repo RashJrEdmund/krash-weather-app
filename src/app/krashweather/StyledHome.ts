@@ -66,7 +66,6 @@ const StyledHome = styled.main<StyledProps>`
     .main_left_col,
     .main_right_col {
       border-radius: 0;
-      background: linear-gradient(to bottom, #0a0c11, #0a0c11, #0a0c116f);
       padding: 10px;
       padding: 0;
       margin: 0;
@@ -81,9 +80,9 @@ const StyledHome = styled.main<StyledProps>`
 
     .main_left_col {
       top: 0;
-      right: 0;
+      left: 100%;
       transform: translate(
-        ${({ showMenu }) => (showMenu ? "0" : "calc(100% + 20px)")}
+        ${({ showMenu }: any) => (showMenu.right ? "-100%" : "20px")}
       );
     }
 
@@ -92,7 +91,7 @@ const StyledHome = styled.main<StyledProps>`
       left: 0;
       z-index: 5;
       transform: translate(
-        ${({ showMenu }) => (showMenu ? "0" : "calc(-100% - 20px)")}
+        ${({ showMenu }: any) => (showMenu.left ? "0" : "calc(-100% - 20px)")}
       );
     }
   }

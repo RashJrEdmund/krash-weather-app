@@ -33,7 +33,6 @@ const StyledSubSide = styled.div`
       width: 100%;
       height: fit-content;
       background-color: transparent;
-      /* background-color: green; */
       cursor: pointer;
       margin: 1rem 0;
       padding: 10px 0;
