@@ -15,6 +15,15 @@ export const getSessionStorage = (key: string) => {
 export const setSessionStorage = (key: string, value: any) =>
   sessionStorage.setItem(key, JSON.stringify(value));
 
+export const createDayData = (weatherData: any, setDayData: any) => {
+  const { list } = weatherData;
+  const dayData = ["day 1", "day 2", "day 3", "day 4", "day 5"].map(
+    (day, i) => ({ [`${day}`]: list.slice(i, i + 8) })
+  );
+
+  console.log(dayData);
+};
+
 export const updateDayData = (data: any, day: number, setBaseData: any) => {
   const baseD = [
     {

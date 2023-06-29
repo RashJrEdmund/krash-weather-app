@@ -6,7 +6,7 @@ import { createContext, useContext } from "react";
 import { API_KEY } from "../services/constants";
 import getData from "@/api/GetData";
 import useAlert from "@/hooks/UseAlert";
-import { updateDayData } from "@/services/utils";
+import { createDayData, updateDayData } from "@/services/utils";
 
 const AppContext = createContext({});
 
@@ -44,6 +44,7 @@ export const WeatherContextProvider = ({ children }: Props) => {
       .then((data) => {
         console.clear();
         // setWeatherData(data);
+        createDayData(data, setDayData);
         updateDayData(data, day, setBaseData);
         console.log("this res", data);
       })
