@@ -1,16 +1,24 @@
 "use client";
 
 import { useWeatherContext } from "@/context/store";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import StyledBase from "./StyledBase";
+import { updateBaseData } from "@/services/utils";
 
 type Props = {};
 
 export default function Base({}: Props) {
   const {
-    baseData,
+    weatherData,
+    dayTime,
     customAlert: { displayAlert },
   } = useWeatherContext();
+
+  const [baseData, setBaseData] = useState<any>(null);
+
+  useEffect(() => {
+    weatherData && updateBaseData(weatherData, dayTime, setBaseData);
+  }, [dayTime, weatherData]);
 
   return (
     <StyledBase>

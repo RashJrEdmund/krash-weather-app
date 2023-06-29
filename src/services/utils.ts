@@ -15,35 +15,41 @@ export const getSessionStorage = (key: string) => {
 export const setSessionStorage = (key: string, value: any) =>
   sessionStorage.setItem(key, JSON.stringify(value));
 
-export const createDayData = (weatherData: any, setDayData: any) => {
-  const { list } = weatherData;
-  const dayData = ["day 1", "day 2", "day 3", "day 4", "day 5"].map(
-    (day, i) => ({ [`${day}`]: list.slice(i, i + 8) })
+export const createWeatherData = (data: any, setWeatherData: any) => {
+  const { list } = data;
+  const dayData: any = {};
+
+  ["day_1", "day_2", "day_3", "day_4", "day_5"].forEach(
+    (day, i) => (dayData[`${day}`] = list.slice(i, i + 8))
   );
 
-  console.log(dayData);
+  setWeatherData({ ...dayData });
 };
 
-export const updateDayData = (data: any, day: number, setBaseData: any) => {
+export const updateBaseData = (
+  weatherData: any,
+  dayTime: { day: string; time: number },
+  setBaseData: any
+) => {
   const baseD = [
     {
       quantity: "Wind Speed",
-      magnetude: data.list[day].wind.speed,
+      magnetude: weatherData[`${dayTime.day}`][dayTime.time].wind.speed,
       unit: "m/s",
     },
     {
       quantity: "Pressure",
-      magnetude: data.list[day].main.pressure,
+      magnetude: weatherData[`${dayTime.day}`][dayTime.time].main.pressure,
       unit: "hPa",
     },
     {
       quantity: "Humidity",
-      magnetude: data.list[day].main.humidity,
+      magnetude: weatherData[`${dayTime.day}`][dayTime.time].main.humidity,
       unit: "%",
     },
     {
       quantity: "Visibility",
-      magnetude: data.list[day].visibility,
+      magnetude: weatherData[`${dayTime.day}`][dayTime.time].visibility,
       unit: "km",
     },
   ];

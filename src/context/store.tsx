@@ -6,7 +6,7 @@ import { createContext, useContext } from "react";
 import { API_KEY } from "../services/constants";
 import getData from "@/api/GetData";
 import useAlert from "@/hooks/UseAlert";
-import { createDayData, updateDayData } from "@/services/utils";
+import { createWeatherData } from "@/services/utils";
 
 const AppContext = createContext({});
 
@@ -22,13 +22,14 @@ type Props = {
 
 export const WeatherContextProvider = ({ children }: Props) => {
   const [weatherData, setWeatherData] = React.useState<any>(null);
-  const [baseData, setBaseData] = React.useState<any>(null);
   const [error, setError] = React.useState<boolean>(false);
   const [showMenu, setShowMenu] = React.useState<boolean>(false);
   const [showOverlay, setShowOverlay] = React.useState<boolean>(false);
   const [pathname, setPathname] = React.useState<string>("/");
-  const [day, setDay] = React.useState<number>(0);
-  const [dayData, setDayData] = React.useState<any>(null);
+  const [dayTime, setDayTime] = React.useState<{ day: string; time: number }>({
+    day: "day_1",
+    time: 0,
+  });
 
   const { AlertComponent, displayAlert, alertMsg } = useAlert();
   const customAlert = { AlertComponent, displayAlert, alertMsg };
@@ -44,9 +45,8 @@ export const WeatherContextProvider = ({ children }: Props) => {
       .then((data) => {
         console.clear();
         // setWeatherData(data);
-        createDayData(data, setDayData);
-        updateDayData(data, day, setBaseData);
         console.log("this res", data);
+        createWeatherData(data, setWeatherData);
       })
       .catch((err) => setError(err));
     // console.log("getting data for", lon, lat, weatherData);
@@ -58,15 +58,12 @@ export const WeatherContextProvider = ({ children }: Props) => {
     log({ [`${data}`]: data });
   };
 
-  React.useEffect(() => {
-    weatherData && updateDayData(weatherData, day, setBaseData);
-  }, [day]);
-
   return (
     <AppContext.Provider
       value={{
         weatherData,
-        baseData,
+        dayTime,
+        setDayTime,
         getWeather,
         logText,
         error,
