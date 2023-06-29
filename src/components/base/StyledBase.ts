@@ -4,11 +4,10 @@ import styled from "@emotion/styled";
 
 const StyledBase = styled.section`
   box-shadow: 0 0 10px #1d2432;
-  background-color: #0a0c11;
+  background-color: var(--side-bg);
   width: 100%;
   height: fit-content;
-  min-height: 200px;
-  height: 85%;
+  min-height: max(85%, 170px);
   align-self: flex-end;
   margin: 0 auto;
   padding: 17px 10px 20px;
@@ -51,6 +50,8 @@ const StyledBase = styled.section`
   @media only screen and (max-width: 950px) {
     border-radius: 0 0 var(--app-border) var(--app-border);
     flex-wrap: wrap;
+    margin: 2rem auto 0;
+
     .data_col {
       display: flex;
       flex-wrap: wrap;

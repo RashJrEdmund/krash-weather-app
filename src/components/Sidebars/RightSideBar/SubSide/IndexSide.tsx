@@ -1,29 +1,59 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import StyledSubSide from "./StyledSubSide";
 import { UserIcon } from "@/components/atoms/Icons";
 import { useWeatherContext } from "@/context/store";
+import { usePathname, useRouter } from "next/navigation";
+import { DAYS } from "@/services/constants";
 
 type Props = { setIndexSide: any };
 
 export default function IndexSide({ setIndexSide }: Props) {
   const {
+    weatherData,
+    dayTime,
+    setDayTime,
     customAlert: { displayAlert },
   } = useWeatherContext();
+  const router = useRouter();
+  const [dates, setDates] = useState<any[]>([]);
 
-  const handleClick = () => {
-    displayAlert("This feature is not yet available");
+  const changeDay = (day: string, dayRoute: number) => {
+    displayAlert(
+      `Weather set for ${
+        day === "day_1" ? "Today" : `${day.replace("_", " ")}`
+      } `
+    );
+
+    router.replace(`/krashweather/${dayRoute}/${dayTime.time + 1}`);
+    setDayTime((prev: any) => ({ ...prev, day }));
   };
+
+  useEffect(() => {
+    if (weatherData) {
+      const days = DAYS.map((day) => ({
+        day: new Date(weatherData[`${day}`][0].dt_txt).toDateString(),
+        temp: 0,
+      }));
+
+      setDates(days);
+    }
+  }, [weatherData]);
 
   return (
     <StyledSubSide>
       <h4 className="index_h4">Next 6 days </h4>
 
       <ul className="mid_section">
-        {["day 1", "day 2", "day 3", "day 4", "day 5", "day 6"].map((day) => (
-          <li title={`weather for ${day}`} key={day} onClick={handleClick}>
-            {day}
+        {DAYS?.map((day, i) => (
+          <li
+            title={`weather on ${dates[i] || day.replace("_", " ")}`}
+            key={day}
+            onClick={() => changeDay(day, i + 1)}
+          >
+            <h3>{dates[i]?.day || day.replace("_", " ")}</h3>
+            <p>T &deg;</p>
           </li>
         ))}
       </ul>
@@ -33,7 +63,7 @@ export default function IndexSide({ setIndexSide }: Props) {
         onClick={() => setIndexSide((prev: boolean) => !prev)}
       >
         <UserIcon />
-        user
+        Account
       </p>
     </StyledSubSide>
   );

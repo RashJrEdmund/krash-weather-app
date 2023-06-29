@@ -31,7 +31,9 @@ const StyledSubSide = styled.div`
 
     li {
       width: 100%;
+      height: fit-content;
       background-color: transparent;
+      /* background-color: green; */
       cursor: pointer;
       margin: 1rem 0;
       padding: 10px 0;
@@ -39,8 +41,12 @@ const StyledSubSide = styled.div`
       white-space: nowrap;
       gap: 7px;
       display: flex;
-      align-items: center;
+      flex-direction: column;
       align-items: flex-start;
+
+      h3 {
+
+      }
     }
   }
 

@@ -8,6 +8,10 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
   --app-border: 10px;
+  --side-bg: #1d2432;
+  --main-gold-color: #feb949;
+  --max-app-width: 1500px;
+  --min-app-height: 50vh;
 }
 
 @media only screen and (max-width: 600px) {
@@ -64,6 +68,7 @@ ul {
 
 a {
   text-decoration: none;
+  word-break: break-all;
 }
 
 @keyframes SearchLoading {

@@ -7,6 +7,7 @@ import { MdLocationOn, MdMenu } from "react-icons/md";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { IoMdSettings } from "react-icons/io";
 import { FaUser } from "react-icons/fa";
+import { ImStatsDots } from "react-icons/im";
 import { BiNews, BiSolidExit } from "react-icons/bi";
 
 export const SearchIcon = styled(LuSearch)`
@@ -26,6 +27,21 @@ export const LocationIcon = styled(MdLocationOn)`
 
 export const MenuIcon = styled(MdMenu)`
   color: #ffba51;
+  font-size: 40px;
+  cursor: pointer;
+
+  @media only screen and (min-width: 950px) {
+    display: none;
+  }
+`;
+
+export const StatsIcon = styled(ImStatsDots)`
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 20px 10px 2.5rem;
+  color: #ffba51;
+  color: gold;
   font-size: 40px;
   cursor: pointer;
 

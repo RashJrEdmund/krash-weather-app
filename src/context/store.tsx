@@ -25,7 +25,6 @@ export const WeatherContextProvider = ({ children }: Props) => {
   const [error, setError] = React.useState<boolean>(false);
   const [showMenu, setShowMenu] = React.useState<boolean>(false);
   const [showOverlay, setShowOverlay] = React.useState<boolean>(false);
-  const [pathname, setPathname] = React.useState<string>("/");
   const [dayTime, setDayTime] = React.useState<{ day: string; time: number }>({
     day: "day_1",
     time: 0,

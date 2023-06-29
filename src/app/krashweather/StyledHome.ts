@@ -5,10 +5,9 @@ import { StyledProps } from "@/types";
 
 const StyledHome = styled.main<StyledProps>`
   background-color: transparent;
-  background-color: green;
-  width: min(98%, 1300px);
+  width: min(98%, var(--max-app-width));
   height: fit-content;
-  min-height: 95vh;
+  min-height: var(--min-app-height);
   display: grid;
   grid-template-columns: 25% 1fr 25%;
   margin: 2rem auto 1rem;
@@ -16,14 +15,13 @@ const StyledHome = styled.main<StyledProps>`
   .main_left_col {
     border-radius: var(--app-border) 0 0 var(--app-border);
     box-shadow: 0 0 10px #1d2432;
-    background-color: #0a0c11;
+    background-color: var(--side-bg);
     padding: 10px;
     margin: 0 10px 0 0;
     min-height: 90vh;
   }
 
   .main_mid_col {
-    background-color: brown;
     min-height: 90vh;
     display: grid;
     grid-template-columns: 1fr;
@@ -52,7 +50,7 @@ const StyledHome = styled.main<StyledProps>`
   .main_right_col {
     border-radius: 0 var(--app-border) var(--app-border) 0;
     box-shadow: 0 0 10px #1d2432;
-    background-color: #0a0c11;
+    background-color: var(--side-bg);
     padding: 10px;
     margin: 0 0 0 10px;
     min-height: 90vh;
@@ -60,6 +58,10 @@ const StyledHome = styled.main<StyledProps>`
 
   @media only screen and (max-width: 950px) {
     grid-template-columns: 1fr;
+
+    .main_mid_col {
+      grid-template-rows: unset;
+    }
 
     .main_left_col,
     .main_right_col {

@@ -1,5 +1,7 @@
 "use client";
 
+import { DAYS } from "./constants";
+
 export const logText = (data: any) => {
   const { clear, log } = console;
   clear();
@@ -17,11 +19,9 @@ export const setSessionStorage = (key: string, value: any) =>
 
 export const createWeatherData = (data: any, setWeatherData: any) => {
   const { list } = data;
-  const dayData: any = {};
+  const dayData: any = { name: data.city.name };
 
-  ["day_1", "day_2", "day_3", "day_4", "day_5"].forEach(
-    (day, i) => (dayData[`${day}`] = list.slice(i, i + 8))
-  );
+  DAYS.forEach((day, i) => (dayData[`${day}`] = list.slice(i, i + 8)));
 
   setWeatherData({ ...dayData });
 };

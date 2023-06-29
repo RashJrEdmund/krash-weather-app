@@ -21,7 +21,7 @@ export default function Weather({}: Props) {
       <div className="weather_col_1">
         <p className="location">
           <LocationIcon />
-          {weather?.name || "Location"}
+          {weatherData?.name || "Location"}
         </p>
 
         <div className="desc_img">
