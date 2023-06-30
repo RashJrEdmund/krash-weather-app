@@ -43,7 +43,7 @@ export default function IndexSide({ setIndexSide }: Props) {
 
   return (
     <StyledSubSide>
-      <h4 className="index_h4">Next 6 days </h4>
+      <h4 className="index_h4">5 day forecast </h4>
 
       <ul className="mid_section">
         {DAYS?.map((day, i) => (

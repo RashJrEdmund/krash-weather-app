@@ -8,7 +8,7 @@ const StyledSubSide = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: flex-start;
+  justify-content: space-between;
 
   h4 {
     color: #ddd;
@@ -50,7 +50,7 @@ const StyledSubSide = styled.div`
 
   .user_button {
     width: 100%;
-    margin: 4rem 0 0;
+    /* margin: 4rem 0 0; */
     font-size: 19px;
     cursor: pointer;
     white-space: nowrap;
