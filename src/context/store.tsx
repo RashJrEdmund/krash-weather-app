@@ -6,6 +6,7 @@ import { createContext, useContext } from "react";
 import { API_KEY } from "../services/constants";
 import getData from "@/api/GetData";
 import useAlert from "@/hooks/UseAlert";
+import { createWeatherData } from "@/services/utils";
 
 const AppContext = createContext({});
 
@@ -22,27 +23,32 @@ type Props = {
 export const WeatherContextProvider = ({ children }: Props) => {
   const [weatherData, setWeatherData] = React.useState<any>(null);
   const [error, setError] = React.useState<boolean>(false);
-  const [showMenu, setShowMenu] = React.useState<boolean>(false);
+  const [showMenu, setShowMenu] = React.useState<{
+    left: boolean;
+    right: boolean;
+  }>({ left: false, right: false });
   const [showOverlay, setShowOverlay] = React.useState<boolean>(false);
-  const [baseData, setBaseData] = React.useState<any>(null);
+  const [dayTime, setDayTime] = React.useState<{ day: string; time: number }>({
+    day: "day_1",
+    time: 0,
+  });
+
   const { AlertComponent, displayAlert, alertMsg } = useAlert();
   const customAlert = { AlertComponent, displayAlert, alertMsg };
 
   const getWeather = (lon: string | number, lat: string | number) => {
     if (!lon || !lat) return;
 
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+    // const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+
+    const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+
     getData(url)
       .then((data) => {
-        setWeatherData(data);
-        const baseD = [
-          { quantity: "Wind Speed", magnetude: data.wind.speed, unit: "m/s" },
-          { quantity: "Pressure", magnetude: data.main.pressure, unit: "hPa" },
-          { quantity: "Humidity", magnetude: data.main.humidity, unit: "%" },
-          { quantity: "Visibility", magnetude: data.visibility, unit: "km" },
-        ];
-
-        setBaseData([...baseD]);
+        console.clear();
+        // setWeatherData(data);
+        console.log("this res", data);
+        createWeatherData(data, setWeatherData);
       })
       .catch((err) => setError(err));
     // console.log("getting data for", lon, lat, weatherData);
@@ -58,7 +64,8 @@ export const WeatherContextProvider = ({ children }: Props) => {
     <AppContext.Provider
       value={{
         weatherData,
-        baseData,
+        dayTime,
+        setDayTime,
         getWeather,
         logText,
         error,

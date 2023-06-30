@@ -10,7 +10,7 @@ export interface UseFetchReturnType {
 }
 
 export interface StyledProps {
-  showMenu?: boolean;
+  showMenu?: { left: boolean; right: boolean };
   url?: string;
   index?: number;
   fetching?: boolean;

@@ -3,13 +3,13 @@
 import styled from "@emotion/styled";
 
 const StyledBase = styled.section`
-  border-radius: 0 0 0 var(--app-border);
   box-shadow: 0 0 10px #1d2432;
-  background-color: #0a0c11;
+  background-color: var(--side-bg);
   width: 100%;
   height: fit-content;
-  min-height: 200px;
-  margin: 2rem auto 0;
+  min-height: max(85%, 170px);
+  align-self: flex-end;
+  margin: 0 auto;
   padding: 17px 10px 20px;
   display: flex;
   justify-content: space-between;
@@ -50,6 +50,9 @@ const StyledBase = styled.section`
   @media only screen and (max-width: 950px) {
     border-radius: 0 0 var(--app-border) var(--app-border);
     flex-wrap: wrap;
+    margin: 1rem auto 0;
+    min-height: 170px;
+
     .data_col {
       display: flex;
       flex-wrap: wrap;

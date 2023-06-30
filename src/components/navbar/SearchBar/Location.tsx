@@ -5,9 +5,8 @@ import React from "react";
 type Props = { location: any };
 
 const StyledLocation = styled.div`
-  /* background: linear-gradient(to bottom, #feba4637, #feba4637, #feba4637); */
   background: linear-gradient(to bottom, #1d2432e4, #1d2432e4, #1d2432e4);
-  box-shadow: -5px 5px 10px #1d2432;
+  box-shadow: -5px 5px 5px #f5f5f54f;
   color: #292148;
   color: #fff;
   height: fit-content;

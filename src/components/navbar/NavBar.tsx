@@ -9,7 +9,7 @@ import { MenuIcon } from "../atoms/Icons";
 const StyledNav = styled.nav`
   display: flex;
   flex-wrap: nowrap;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   width: 100%;
 
@@ -36,7 +36,7 @@ export default function NavBar({}: Props) {
   return (
     <StyledNav>
       <span className="logo" title="Krash Weather app">
-        <MenuIcon onClick={() => setShowMenu((prev: any) => !prev)} />
+        <MenuIcon onClick={() => setShowMenu({ left: true, right: false })} />
         <div className="krash_text">Krash weather</div>
       </span>
       <SearchBar />
