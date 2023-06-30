@@ -4,7 +4,6 @@ import React from "react";
 import IndexSide from "./SubSide/IndexSide";
 import UserSidebar from "./SubSide/UserSidebar";
 import { useWeatherContext } from "@/context/store";
-import { useRouter } from "next/navigation";
 import StyledSideBar from "../StyledSidBar";
 
 type Props = {};

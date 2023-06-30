@@ -13,6 +13,7 @@ const StyledLeftSide = styled(StyledSideBar)`
       color: #ddd;
       margin: 17px 0 0;
       cursor: pointer;
+      border-top: 1px solid #808080;
 
       h4 {
         font-weight: 19px;
@@ -30,6 +31,12 @@ const StyledLeftSide = styled(StyledSideBar)`
 
   @media only screen and (max-width: 950px) {
     ul {
+      border-top: 1px solid #ddd;
+      height: 90vh;
+      overflow: auto;
+      padding: 0 0 50px;
+      margin: 10px 0 0;
+
       li {
         &:hover {
           border-right: 1px solid #008000;

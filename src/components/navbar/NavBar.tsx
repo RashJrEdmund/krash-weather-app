@@ -9,7 +9,7 @@ import { MenuIcon } from "../atoms/Icons";
 const StyledNav = styled.nav`
   display: flex;
   flex-wrap: nowrap;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   width: 100%;
 

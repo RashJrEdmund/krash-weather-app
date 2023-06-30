@@ -50,7 +50,8 @@ const StyledBase = styled.section`
   @media only screen and (max-width: 950px) {
     border-radius: 0 0 var(--app-border) var(--app-border);
     flex-wrap: wrap;
-    margin: 2rem auto 0;
+    margin: 1rem auto 0;
+    min-height: 170px;
 
     .data_col {
       display: flex;

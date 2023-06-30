@@ -44,7 +44,6 @@ const StyledSubSide = styled.div`
       align-items: flex-start;
 
       h3 {
-
       }
     }
   }
@@ -57,16 +56,41 @@ const StyledSubSide = styled.div`
     white-space: nowrap;
     gap: 7px;
     display: flex;
-    align-items: center;
     align-items: flex-start;
   }
 
   @media only screen and (max-width: 950px) {
     padding: 10px;
+
+    ul {
+      li {
+        margin: 10px 0 0;
+      }
+    }
+
+    .user_button {
+      margin: 0;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    ul {
+      border-top: 1px solid #ddd;
+      height: 70vh;
+      overflow: auto;
+      padding: 0 0 30px;
+      margin: 10px 0 15px;
+    }
   }
 
   @media only screen and (min-width: 768px) {
     ul {
+      border-top: 1px solid #ddd;
+      height: 70vh;
+      overflow: auto;
+      padding: 0 0 30px;
+      margin: 10px 0 0;
+
       li:hover {
         border-right: 1px solid #fff;
       }

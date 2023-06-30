@@ -41,8 +41,6 @@ export default function LeftSideBar({}: Props) {
 
       <p>8 hours forecast a Day</p>
 
-      <p onClick={() => router.push("krashweather/2")}>Text Navigate</p>
-
       <ul>
         {hours?.map((hour: any, i: number) => (
           <li key={hour.dt_txt} onClick={() => choseTime(i)}>

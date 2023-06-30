@@ -40,9 +40,10 @@ export const StatsIcon = styled(ImStatsDots)`
   bottom: 0;
   right: 0;
   margin: 20px 10px 2.5rem;
-  color: #ffba51;
-  color: gold;
-  font-size: 40px;
+  padding: 5px;
+  color: green;
+  background-color: #00000056;
+  font-size: 45px;
   cursor: pointer;
 
   @media only screen and (min-width: 950px) {
