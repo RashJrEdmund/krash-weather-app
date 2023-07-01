@@ -39,7 +39,7 @@ export default function Layout({ children }: Props) {
   }, []);
 
   React.useEffect(() => {
-    console.log(router, params, routname);
+    // console.log(router, params, routname);
   }, [routname]);
 
   return (

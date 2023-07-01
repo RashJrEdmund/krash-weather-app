@@ -22,6 +22,7 @@ export const createWeatherData = (data: any, setWeatherData: any) => {
   const dayData: any = { name: data.city.name };
 
   DAYS.forEach((day, i) => (dayData[`${day}`] = list.slice(i, i + 8)));
+  console.log("this dayData", dayData);
 
   setWeatherData({ ...dayData });
 };

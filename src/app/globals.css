@@ -88,3 +88,15 @@ a {
     transform: rotate(360deg);
   }
 }
+
+@keyframes LandingLoader {
+  0% {
+    transform: translate(0);
+  }
+  50% {
+    transform: translate(90%);
+  }
+  100% {
+    transform: translate(5%);
+  }
+}

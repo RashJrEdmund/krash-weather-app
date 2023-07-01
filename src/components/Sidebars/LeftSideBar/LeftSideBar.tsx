@@ -20,7 +20,7 @@ export default function LeftSideBar({}: Props) {
   };
 
   useEffect(() => {
-    console.log({ pathName });
+    // console.log({ pathName });
   }, [pathName]);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function LeftSideBar({}: Props) {
 
       setHours(hrs);
 
-      console.log(weatherData, hrs);
+      // console.log(weatherData, hrs);
     }
   }, [dayTime, weatherData]);
 
