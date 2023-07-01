@@ -12,11 +12,13 @@ export default function LeftSideBar({}: Props) {
   const router = useRouter();
   const pathName = usePathname();
 
-  const { setShowMenu, dayTime, setDayTime, weatherData } = useWeatherContext();
+  const { setShowMenu, dayTime, setDayTime, setTime, weatherData } =
+    useWeatherContext();
 
-  const choseTime = (ind: number) => {
-    router.push(`/krashweather/2/${ind + 1}`);
-    setDayTime((prev: any) => ({ ...prev, time: ind }));
+  const choseTime = (ind: number, time: string) => {
+    router.push(`/krashweather/1/${ind + 1}`);
+    setDayTime({ day: "day_1", time: ind });
+    setTime(time);
   };
 
   useEffect(() => {
@@ -43,7 +45,10 @@ export default function LeftSideBar({}: Props) {
 
       <ul>
         {hours?.map((hour: any, i: number) => (
-          <li key={hour.dt_txt} onClick={() => choseTime(i)}>
+          <li
+            key={hour.dt_txt}
+            onClick={() => choseTime(i, hour.dt_txt.split(" ").pop())}
+          >
             <h4>
               Hour: <span>{hour.dt_txt.split(" ").pop()}</span>
             </h4>

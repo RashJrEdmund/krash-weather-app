@@ -20,18 +20,25 @@ type Props = {
  Standard units: 26 degrees Celsius is equal to 79.8 degrees Rankine.
 */
 
+type ShowMenuType = {
+  left: boolean;
+  right: boolean;
+};
+
 export const WeatherContextProvider = ({ children }: Props) => {
   const [weatherData, setWeatherData] = React.useState<any>(null);
   const [error, setError] = React.useState<boolean>(false);
-  const [showMenu, setShowMenu] = React.useState<{
-    left: boolean;
-    right: boolean;
-  }>({ left: false, right: false });
+  const [showMenu, setShowMenu] = React.useState<ShowMenuType>({
+    left: false,
+    right: false,
+  });
   const [showOverlay, setShowOverlay] = React.useState<boolean>(false);
   const [dayTime, setDayTime] = React.useState<{ day: string; time: number }>({
     day: "day_1",
     time: 0,
-  });
+  }); // this one is used to refference the data in weather
+  const [time, setTime] = React.useState<string>("Hs:Mm:Ss");
+  const [day, setDay] = React.useState<string>("Today"); // this guy has just one use so far. used in the Date_Time component
 
   const { AlertComponent, displayAlert, alertMsg } = useAlert();
   const customAlert = { AlertComponent, displayAlert, alertMsg };
@@ -58,6 +65,10 @@ export const WeatherContextProvider = ({ children }: Props) => {
     <AppContext.Provider
       value={{
         weatherData,
+        day,
+        setDay,
+        time,
+        setTime,
         dayTime,
         setDayTime,
         getWeather,

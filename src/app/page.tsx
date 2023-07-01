@@ -1,10 +1,16 @@
 "use client";
 
 import WeatherAPPGaurd from "@/HOC/WeatherAPP";
+import { SlidData } from "@/images";
 import { APP_VERSION } from "@/services/constants";
+import { StyledProps } from "@/types";
 import styled from "@emotion/styled";
-const StyledLanding = styled.main`
-  background-color: #d5d5d5;
+
+const StyledLanding = styled.main<StyledProps>`
+  background: linear-gradient(to bottom, #00000070, #00000070, #00000070),
+    url(${({ url }) => url});
+  background-position: center;
+  background-size: cover;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -14,6 +20,7 @@ const StyledLanding = styled.main`
   .loader {
     position: relative;
     background-color: #1d2432;
+    border-radius: 5px;
     height: fit-content;
     min-height: 200px;
     width: min(90vw, 500px);
@@ -27,7 +34,7 @@ const StyledLanding = styled.main`
       position: absolute;
       top: 0;
       left: 0;
-      color: green;
+      color: #008000;
       font-size: 15px;
       margin: 15px;
     }
@@ -46,6 +53,7 @@ const StyledLanding = styled.main`
     }
 
     .loading_text {
+      color: #d5d5d5;
       position: absolute;
       bottom: 0;
       left: 50%;
@@ -72,7 +80,7 @@ const StyledLanding = styled.main`
 
 const Home = () => {
   return (
-    <StyledLanding>
+    <StyledLanding url={SlidData[0]}>
       <section className="loader">
         <span className="versoin">version : {APP_VERSION}</span>
         <div className="text_holder">
@@ -80,7 +88,7 @@ const Home = () => {
           <span className="text_2">weather</span>
         </div>
 
-        <span className="loading_text">Loading</span>
+        <span className="loading_text">Loading...</span>
       </section>
     </StyledLanding>
   );

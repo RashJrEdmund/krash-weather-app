@@ -13,22 +13,26 @@ type Props = { setIndexSide: any };
 export default function IndexSide({ setIndexSide }: Props) {
   const {
     weatherData,
-    dayTime,
+    setTime,
+    setDay,
     setDayTime,
     customAlert: { displayAlert },
   } = useWeatherContext();
   const router = useRouter();
   const [dates, setDates] = useState<any[]>([]);
 
-  const changeDay = (day: string, dayRoute: number) => {
+  const changeDay = (day: string, dayRoute: number, actualDay: any) => {
     displayAlert(
       `Weather set for ${
         day === "day_1" ? "Today" : `${day.replace("_", " ")}`
       } `
     );
 
-    router.replace(`/krashweather/${dayRoute}/${dayTime.time + 1}`);
-    setDayTime((prev: any) => ({ ...prev, day }));
+    setDay(actualDay || day);
+    setTime("Hs:Mm");
+
+    router.replace(`/krashweather/${dayRoute}/1`);
+    setDayTime({ time: 0, day });
   };
 
   useEffect(() => {
@@ -48,9 +52,11 @@ export default function IndexSide({ setIndexSide }: Props) {
       <ul className="mid_section">
         {DAYS?.map((day, i) => (
           <li
-            title={`weather on ${dates[i] || day.replace("_", " ")}`}
+            title={`weather ${i !== 0 ? "on" : "for"} ${
+              dates[i] || day.replace("_", " ")
+            }`}
             key={day}
-            onClick={() => changeDay(day, i + 1)}
+            onClick={() => changeDay(day, i + 1, dates[i])}
           >
             <h3>{dates[i] || day.replace("_", " ")}</h3>
             <p>T &deg;</p>

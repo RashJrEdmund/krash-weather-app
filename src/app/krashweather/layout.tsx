@@ -12,6 +12,7 @@ import { Overlay } from "@/components/atoms/Atoms";
 import useAlert from "@/hooks/UseAlert";
 import { usePathname, useRouter, useParams } from "next/navigation";
 import LeftSideBar from "@/components/Sidebars/LeftSideBar/LeftSideBar";
+import Date_Time from "@/components/Date_time/Date_Time";
 
 type Props = { children: React.ReactNode };
 
@@ -63,6 +64,8 @@ export default function Layout({ children }: Props) {
           <section className="display_section">
             <NavBar />
             <Weather />
+
+            <Date_Time />
           </section>
 
           <Base />

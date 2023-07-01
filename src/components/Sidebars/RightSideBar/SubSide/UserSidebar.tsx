@@ -20,7 +20,7 @@ export default function UserSidebar({ setIndexSide }: Props) {
   return (
     <StyledSubSide>
       <h4 title="back" onClick={() => setIndexSide((prev: any) => !prev)}>
-        <BackIcon /> User
+        <BackIcon /> Back
       </h4>
 
       <ul>
