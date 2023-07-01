@@ -6,6 +6,7 @@ import { UserIcon } from "@/components/atoms/Icons";
 import { useWeatherContext } from "@/context/store";
 import { usePathname, useRouter } from "next/navigation";
 import { DAYS } from "@/services/constants";
+import { getDay } from "@/services/utils";
 
 type Props = { setIndexSide: any };
 
@@ -32,10 +33,9 @@ export default function IndexSide({ setIndexSide }: Props) {
 
   useEffect(() => {
     if (weatherData) {
-      const days = DAYS.map((day) => ({
-        day: new Date(weatherData[`${day}`][0].dt_txt).toDateString(),
-        temp: 0,
-      }));
+      const days = DAYS.map((day) =>
+        getDay(new Date(weatherData[`${day}`][0].dt_txt))
+      );
 
       setDates(days);
     }
@@ -52,7 +52,7 @@ export default function IndexSide({ setIndexSide }: Props) {
             key={day}
             onClick={() => changeDay(day, i + 1)}
           >
-            <h3>{dates[i]?.day || day.replace("_", " ")}</h3>
+            <h3>{dates[i] || day.replace("_", " ")}</h3>
             <p>T &deg;</p>
           </li>
         ))}

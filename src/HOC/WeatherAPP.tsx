@@ -14,11 +14,11 @@ const WeatherAPPGaurd = (Component: any) => {
     const router = useRouter();
     const pathName = usePathname()
 
-    // React.useEffect(() => {
-    //   // console.clear()
-    //   // console.log(params, router, pathName);
-    //   if(!pathName.split('/').includes('weather')) router.replace('/krashweather');
-    // }, [pathName]);
+    React.useEffect(() => {
+      // console.clear()
+      // console.log(params, router, pathName);
+      if(!pathName.split('/').includes('weather')) router.replace('/krashweather');
+    }, [pathName]);
 
     return <Component {...props} />;
   };

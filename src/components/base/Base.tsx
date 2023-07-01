@@ -3,7 +3,7 @@
 import { useWeatherContext } from "@/context/store";
 import React, { useEffect, useState } from "react";
 import StyledBase from "./StyledBase";
-import { updateBaseData } from "@/services/utils";
+import { updateBaseData } from "@/services/weather";
 import { StatsIcon } from "../atoms/Icons";
 
 type Props = {};

@@ -6,7 +6,7 @@ import { createContext, useContext } from "react";
 import { API_KEY } from "../services/constants";
 import getData from "@/api/GetData";
 import useAlert from "@/hooks/UseAlert";
-import { createWeatherData } from "@/services/utils";
+import { createWeatherData } from "@/services/weather";
 
 const AppContext = createContext({});
 
@@ -54,12 +54,6 @@ export const WeatherContextProvider = ({ children }: Props) => {
     // console.log("getting data for", lon, lat, weatherData);
   };
 
-  const logText = (data: any) => {
-    const { clear, log } = console;
-    clear();
-    log({ [`${data}`]: data });
-  };
-
   return (
     <AppContext.Provider
       value={{
@@ -67,7 +61,6 @@ export const WeatherContextProvider = ({ children }: Props) => {
         dayTime,
         setDayTime,
         getWeather,
-        logText,
         error,
         showMenu,
         setShowMenu,
