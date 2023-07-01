@@ -11,7 +11,7 @@ export const getDay = (date: any) => {
   // date.toLocaleString(undefined, {....}) looks like : 'Saturday, 1 July 2023'
   // now you get why i'm spliting at new Date().getFullYear() and taking the first val
 
-  const year = new Date().getFullYear();
+  const year: any = new Date().getFullYear();
 
   const res = date
     .toLocaleString(undefined, {
