@@ -1,6 +1,7 @@
 import { WeatherContextProvider } from "@/context/store";
 import "./globals.css";
 import { Inter } from "next/font/google";
+import { AppContextProvider } from "@/context/WeatherContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,6 +19,7 @@ export default function RootLayout({
     <WeatherContextProvider>
       <html lang="en">
         <head>
+          <link rel="icon" href="/favicon.png" />
           <meta
             http-equiv="Content-Security-Policy"
             content="upgrade-insecure-requests"

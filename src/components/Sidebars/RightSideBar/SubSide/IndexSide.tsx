@@ -12,6 +12,7 @@ type Props = { setIndexSide: any };
 
 export default function IndexSide({ setIndexSide }: Props) {
   const {
+    _5_days,
     weatherData,
     setTime,
     setDay,
@@ -50,7 +51,7 @@ export default function IndexSide({ setIndexSide }: Props) {
       <h4 className="index_h4">5 day forecast </h4>
 
       <ul className="mid_section">
-        {DAYS?.map((day, i) => (
+        {_5_days?.map((day, i) => (
           <li
             title={`weather ${i !== 0 ? "on" : "for"} ${
               dates[i] || day.replace("_", " ")

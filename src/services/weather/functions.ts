@@ -1,3 +1,5 @@
+import { getCurrentWeekDay } from "../utils";
+
 const getWeatherToday = (weather_arr: Array<any>) => {
     const todaylist = []; // weather_arr.filter(({ dt_txt }) => new Date(dt_txt).toLocaleDateString('en-US', { weekday: "long" }) === new Date().toLocaleDateString('en-US', { weekday: "long" }));
 
@@ -31,8 +33,6 @@ const getWeatherToday = (weather_arr: Array<any>) => {
     }
 }
 
-const getCurrentDay = (firstForADay: any) => new Date(firstForADay.dt_txt).toLocaleDateString('en-US', { weekday: "long" });
-
 const getSortedDays = (array_days: any) => array_days.sort((a: any, z: any) => new Date(a) < new Date(z));
 
 export const distributeWeather = (weather_arr: Array<any>) => {
@@ -42,7 +42,9 @@ export const distributeWeather = (weather_arr: Array<any>) => {
 
     const { today, restOfDays } = getWeatherToday(weather_arr);
 
-    const firstDayInForecast = getCurrentDay(today.weatherlist[0]) // to get the first day in the forecast
+    const date = new Date(today.weatherlist[0].dt_txt);
+
+    const firstDayInForecast = getCurrentWeekDay(date) // to get the first day in the forecast
 
     const _5_day_weather = {
         [firstDayInForecast]: today.weatherlist,
@@ -51,7 +53,7 @@ export const distributeWeather = (weather_arr: Array<any>) => {
     for (let i = 0; i < 5; i++) {
         const firstForADay = restOfDays.weatherlist[i * NWP]; // first weather is the first weather forecast on each day.
 
-        const that_day = getCurrentDay(firstForADay);
+        const that_day = getCurrentWeekDay(new Date(firstForADay.dt_txt));
 
         _5_day_weather[that_day] = restOfDays.weatherlist.slice(i * NWP, i * NWP + NWP);
     }

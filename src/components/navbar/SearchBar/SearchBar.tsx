@@ -11,7 +11,7 @@ import { Overlay } from "@/components/atoms/Atoms";
 
 type Props = {};
 export default function SearchBar({}: Props) {
-  const [data, setData] = React.useState<any>(null);
+  const [locationData, setLocationData] = React.useState<any>(null);
   const [searchVal, setSearchVal] = React.useState<string>("");
   const [loading, setLoading] = React.useState<boolean>(false);
 
@@ -29,7 +29,7 @@ export default function SearchBar({}: Props) {
     setLoading(true);
     const url = `http://api.openweathermap.org/geo/1.0/direct?q=${searchVal}&limit=5&appid=${API_KEY}`;
     getData(url)
-      .then((res) => setData(res))
+      .then((res) => setLocationData(res))
       .finally(() => setLoading(false));
   };
 
@@ -55,7 +55,11 @@ export default function SearchBar({}: Props) {
           <input
             type="text"
             placeholder="search location"
+            value={searchVal}
             onChange={handleInput}
+            onFocus={() => {
+              if (searchVal.trim()) setShowOverlay(true);
+            }}
           />
           <SearchIcon />
         </div>
@@ -63,7 +67,7 @@ export default function SearchBar({}: Props) {
         <div className="show_locations">
           {searchVal.trim() &&
             showOverlay &&
-            data?.map((location: any) => (
+            locationData?.map((location: any) => (
               <Location
                 key={location.lat + "-" + location.lon}
                 location={location}

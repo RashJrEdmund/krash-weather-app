@@ -8,20 +8,19 @@ import { LocationIcon } from "../atoms/Icons";
 
 type Props = {};
 
-export default function Weather({}: Props) {
-  const { weatherData, dayTime } = useWeatherContext();
-  const [weather, setWeather] = useState<any>(null);
+export default function Weather({ }: Props) {
+  const { currentWeather } = useWeatherContext();
 
   useEffect(() => {
-    if (weatherData) setWeather(weatherData[`${dayTime.day}`][dayTime.time]);
-  }, [weatherData, dayTime]);
+    console.log({ currentWeather });
+  }, [currentWeather]);
 
   return (
     <StyledWeather>
       <div className="weather_col_1">
         <p className="location">
           <LocationIcon />
-          {weatherData?.name || "Location"}
+          {currentWeather?.location || "Location"}
         </p>
 
         <div className="desc_img">

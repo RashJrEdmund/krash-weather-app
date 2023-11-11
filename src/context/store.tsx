@@ -1,88 +1,215 @@
-"use client";
+"use client"
 
-import React from "react";
-
-import { createContext, useContext } from "react";
-import { API_KEY } from "../services/constants";
-import getData from "@/api/GetData";
+import { createContext, useContext, useState, useEffect } from "react";
+import getWeatherData, { getCurrentWeather } from "@/services/weather/weather.api";
+import { getDefaultGeoLocation } from "@/services/location";
 import useAlert from "@/hooks/UseAlert";
-import { createWeatherData } from "@/services/weather";
 
-const AppContext = createContext({});
+interface IProps {
+    children: React.ReactNode,
+}
 
-type Props = {
-  children: React.ReactNode;
+interface IcurrentWeather {
+    location: string,
+    temp: string,
+    description: string,
+    wind_speed: string,
+    pressure: string,
+    humidity: string,
+    icon: string,
+}
+
+interface IweatherForecast {
+    [x: string]: any[]
+}
+
+interface Ilocation {
+    name: string,
+}
+
+interface IShowMenuType {
+    left: boolean;
+    right: boolean;
 };
 
-/*
- Imperial units: 26 degrees Celsius is equal to 78.8 degrees Fahrenheit.
- Metric units: 26 degrees Celsius is equal to 26.0 degrees Celsius.
- Standard units: 26 degrees Celsius is equal to 79.8 degrees Rankine.
-*/
+interface ICustomAlert {
+    AlertComponent: JSX.Element,
+    displayAlert: (msg: string) => void,
+    alertMsg: {
+        message: string,
+        show: boolean,
+    }
+}
 
-type ShowMenuType = {
-  left: boolean;
-  right: boolean;
-};
+interface IAppContext {
+    _5_days: Array<string>
+    set5Days: React.Dispatch<React.SetStateAction<Array<string>>>,
 
-export const WeatherContextProvider = ({ children }: Props) => {
-  const [weatherData, setWeatherData] = React.useState<any>(null);
-  const [error, setError] = React.useState<boolean>(false);
-  const [showMenu, setShowMenu] = React.useState<ShowMenuType>({
-    left: false,
-    right: false,
-  });
-  const [showOverlay, setShowOverlay] = React.useState<boolean>(false);
-  const [dayTime, setDayTime] = React.useState<{ day: string; time: number }>({
-    day: "day_1",
-    time: 0,
-  }); // this one is used to refference the data in weather
-  const [time, setTime] = React.useState<string>("Hs:Mm:Ss");
-  const [day, setDay] = React.useState<string>("Today"); // this guy has just one use so far. used in the Date_Time component
+    weatherForeCast: IweatherForecast | null,
+    setWeatherForeCast: React.Dispatch<React.SetStateAction<IweatherForecast | null>>
 
-  const { AlertComponent, displayAlert, alertMsg } = useAlert();
-  const customAlert = { AlertComponent, displayAlert, alertMsg };
+    currentWeather: IcurrentWeather | null,
+    location: Ilocation | null,
 
-  const getWeather = (lon: string | number, lat: string | number) => {
-    if (!lon || !lat) return;
+    currentDay: string,
+    setCurrentDAy: React.Dispatch<React.SetStateAction<string>>
 
-    // const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+    todaysWeather: Array<any>,
+    setTodaysWeather: React.Dispatch<React.SetStateAction<Array<any>>>,
 
-    const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+    showMenu: IShowMenuType,
+    setShowMenu: React.Dispatch<React.SetStateAction<IShowMenuType>>,
 
-    getData(url)
-      .then((data) => {
-        console.clear();
-        // setWeatherData(data);
-        console.log("this res", data);
-        createWeatherData(data, setWeatherData);
-      })
-      .catch((err) => setError(err));
-    // console.log("getting data for", lon, lat, weatherData);
-  };
+    showOverlay: boolean,
+    setShowOverlay: React.Dispatch<React.SetStateAction<boolean>>,
 
-  return (
-    <AppContext.Provider
-      value={{
-        weatherData,
-        day,
-        setDay,
-        time,
-        setTime,
-        dayTime,
-        setDayTime,
-        getWeather,
-        error,
+    time: string,
+    setTime: React.Dispatch<React.SetStateAction<string>>,
+
+    day: string,
+    setDay: React.Dispatch<React.SetStateAction<string>>,
+
+    error: boolean,
+    customAlert: ICustomAlert,
+
+    updateStatesAndCurrentLocation: (lat: number, lon: number) => Promise<void>
+}
+
+const AppContext = createContext<IAppContext | null>(null);
+
+const WeatherContextProvider = ({ children }: IProps) => {
+    const [_5_days, set5Days] = useState<Array<string>>(["today", "day_2", "day_3", "day_4", "day_5"]);
+    const [weatherForeCast, setWeatherForeCast] = useState<IweatherForecast | null>(null);
+    const [currentDay, setCurrentDAy] = useState<string>(""); // is equivalent to new Date().toLocaleDateString('en-US', { weekday: "long" });
+    const [todaysWeather, setTodaysWeather] = useState<Array<any>>([]);
+    const [location, setLocation] = useState<Ilocation | null>(null);
+    const [currentWeather, setCurrentWeather] = useState<IcurrentWeather | null>(null);  // the users current weather. not a forecast
+
+    const [error, setError] = useState<boolean>(false);
+    const [showOverlay, setShowOverlay] = useState<boolean>(false);
+    const [time, setTime] = useState<string>("Hs:Mm:Ss");
+    const [day, setDay] = useState<string>("Today");
+    const [showMenu, setShowMenu] = useState<IShowMenuType>({
+        left: false,
+        right: false,
+    });
+
+    const { AlertComponent, displayAlert, alertMsg } = useAlert();
+    const customAlert = { AlertComponent, displayAlert, alertMsg } as any as ICustomAlert;
+
+    const updateWeatherStates = (lat: number, lon: number) => {
+        getWeatherData(lat, lon)
+            .then((res) => {
+                const { _5_day_weather, sorted_days, today, location: loc } = res; // loc is an alias to location to avoid conflicting with location from context
+
+                if (!(_5_day_weather && sorted_days && today && loc)) return null;
+
+                setWeatherForeCast(_5_day_weather as IweatherForecast);
+                setTodaysWeather(_5_day_weather[today]);
+                set5Days([...sorted_days]);
+                setCurrentDAy(today);
+                setLocation(loc);
+            })
+            .catch(console.error);
+    }
+
+    const updateStatesAndCurrentLocation = async (lat: number, lon: number) => {
+        const res = await getCurrentWeather(lat, lon);
+
+        const res_data: IcurrentWeather = {
+            location: res.name,
+            temp: res.main.temp,
+            description: res.weather[0].description,
+            wind_speed: res.wind.speed,
+            pressure: res.main.pressure,
+            humidity: res.main.humidity,
+            icon: res.weather[0].icon,
+        }
+
+        console.log("getCurrentWeather res", res);
+        setCurrentWeather(res_data);
+
+        updateWeatherStates(lat, lon);
+    }
+
+    useEffect(() => {
+        (async () => {
+            const location = await getDefaultGeoLocation(); // get's user's geo location on start.
+
+            // console.log("location", location); // see ipgeolocation response.
+            if (!location) return;
+
+            const { latitude: lat, longitude: lon } = location;
+
+            console.clear();
+            console.log("location res", location)
+
+            updateStatesAndCurrentLocation(lat, lon);
+        })();
+    }, []);
+
+    useEffect(() => {
+        if (currentDay && weatherForeCast) {
+            setTodaysWeather(weatherForeCast[currentDay]);
+        }
+    }, [currentDay]);
+
+    useEffect(() => {
+        console.log({
+            _5_days,
+            currentWeather,
+            currentDay,
+            weatherForeCast,
+            todaysWeather
+        })
+    }, [_5_days,
+        currentWeather,
+        currentDay,
+        weatherForeCast,
+        todaysWeather
+    ]);
+
+    return <AppContext.Provider value={{
+        _5_days,
+        set5Days,
+
+        currentWeather,
+        location,
+
+        currentDay,
+        setCurrentDAy,
+
+        weatherForeCast,
+        setWeatherForeCast,
+
+        todaysWeather,
+        setTodaysWeather,
+
         showMenu,
         setShowMenu,
+
         showOverlay,
         setShowOverlay,
-        customAlert,
-      }}
-    >
-      {children}
-    </AppContext.Provider>
-  );
-};
 
-export const useWeatherContext: () => any = () => useContext(AppContext);
+        time,
+        setTime,
+
+        day,
+        setDay,
+
+        error,
+
+        customAlert,
+
+        updateStatesAndCurrentLocation,
+    }}>
+        {children}
+    </AppContext.Provider>
+}
+
+const useWeatherContext = () => useContext(AppContext) as any as IAppContext;
+
+export {
+    WeatherContextProvider,
+    useWeatherContext
+}

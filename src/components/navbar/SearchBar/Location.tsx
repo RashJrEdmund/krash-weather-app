@@ -43,21 +43,12 @@ const StyledLocation = styled.div`
   }
 `;
 
-// const obj = {
-//   country: "CM",
-//   lat: 6.2108889,
-//   local_names: { fr: "Kumbo", ru: "Кумбо" },
-//   lon: 10.6867788,
-//   name: "Kumbo",
-//   state: "Northwest",
-// };
-
 export default function Location({ location }: Props) {
-  const { getWeather } = useWeatherContext();
+  const { updateStatesAndCurrentLocation } = useWeatherContext();
 
   return (
     <StyledLocation
-      onClick={() => getWeather(location.lon, location.lat)}
+      onClick={() => updateStatesAndCurrentLocation(location.lon, location.lat)}
       title={`look up ${location.state}`}
     >
       <div className="div">

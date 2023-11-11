@@ -1,43 +1,23 @@
 "use client";
 
 import React from "react";
-import Base from "@/components/base/Base";
-import NavBar from "@/components/navbar/NavBar";
 import Sidebar from "@/components/Sidebars/RightSideBar/Sidebar";
 import StyledHome from "./StyledHome";
-import Weather from "@/components/weather/Weather";
 import { useWeatherContext } from "@/context/store";
-import { SlidData } from "@/images";
 import { Overlay } from "@/components/atoms/Atoms";
-import useAlert from "@/hooks/UseAlert";
 import { usePathname, useRouter, useParams } from "next/navigation";
-import LeftSideBar from "@/components/Sidebars/LeftSideBar/LeftSideBar";
-import Date_Time from "@/components/Date_time/Date_Time";
+// import LeftSideBar from "@/components/Sidebars/LeftSideBar/LeftSideBar";
 
 type Props = { children: React.ReactNode };
 
 export default function Layout({ children }: Props) {
-  const [photoIndx, setPhotoIndx] = React.useState(0);
   const routname = usePathname();
   const router = useRouter();
   const params = useParams();
 
   const { showMenu, setShowMenu, customAlert, pathname, setPathname } =
     useWeatherContext();
-  const { alertMsg, AlertComponent } = customAlert;
-
-  React.useEffect(() => {
-    const intId = setInterval(
-      () =>
-        setPhotoIndx((prev) => {
-          if (prev === SlidData.length - 1) return 0;
-          return prev + 1;
-        }),
-      15000
-    );
-
-    return () => clearInterval(intId);
-  }, []);
+  const { alertMsg, AlertComponent } = customAlert as any;
 
   React.useEffect(() => {
     // console.log(router, params, routname);
@@ -55,28 +35,17 @@ export default function Layout({ children }: Props) {
 
       {alertMsg.show && <AlertComponent />}
 
-      <StyledHome showMenu={showMenu} url={SlidData[photoIndx]}>
+      <StyledHome showMenu={showMenu}>
         <div className="main_left_col">
-          <LeftSideBar />
+          {/* <LeftSideBar /> */}
         </div>
 
-        <div className="main_mid_col">
-          <section className="display_section">
-            <NavBar />
-            <Weather />
-
-            <Date_Time />
-          </section>
-
-          <Base />
-        </div>
+        {children}
 
         <div className="main_right_col">
           <Sidebar />
         </div>
       </StyledHome>
-
-      <p>{children}</p>
     </>
   );
 }

@@ -39,6 +39,7 @@ export default function NavBar({}: Props) {
         <MenuIcon onClick={() => setShowMenu({ left: true, right: false })} />
         <div className="krash_text">Krash weather</div>
       </span>
+
       <SearchBar />
     </StyledNav>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import WeatherAPPGaurd from "@/HOC/WeatherAPP";
-import { SlidData } from "@/images";
+import { SlideData } from "@/images";
 import { APP_VERSION } from "@/services/constants";
 import { StyledProps } from "@/types";
 import styled from "@emotion/styled";
@@ -80,7 +80,7 @@ const StyledLanding = styled.main<StyledProps>`
 
 const Home = () => {
   return (
-    <StyledLanding url={SlidData[0]}>
+    <StyledLanding url={SlideData[0]}>
       <section className="loader">
         <span className="versoin">version : {APP_VERSION}</span>
         <div className="text_holder">

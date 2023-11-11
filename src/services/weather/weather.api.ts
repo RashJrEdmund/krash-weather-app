@@ -10,7 +10,7 @@ const getWeatherFromLocation = async (lat: number | string, lon: number | string
     }
 }
 
-export const getWeatherData = async (lat: number | string, lon: number | number) => {
+const getWeatherData = async (lat: number | string, lon: number | number) => {
     return getWeatherFromLocation(lat, lon)
         .then(weather => {
             const { _5_day_weather, sorted_days } = distributeWeather(weather.list);
@@ -25,13 +25,18 @@ export const getWeatherData = async (lat: number | string, lon: number | number)
         });
 }
 
-export const getCurrentWeather = async (lat: number | string, lon: number | string) => {
+const getCurrentWeather = async (lat: number | string, lon: number | string) => {
     try {
         const search_url = `https://api.openweathermap.org/data/2.5/weather?units=metric&&lat=${lat}&lon=${lon}&appid=${API_KEY}`
         return fetch(search_url).then(res => res.json());
     } catch (error) {
         console.log(error);
     }
+}
+
+export {
+    getWeatherData,
+    getCurrentWeather
 }
 
 export default getWeatherData;
