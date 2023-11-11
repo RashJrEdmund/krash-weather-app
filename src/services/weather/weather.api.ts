@@ -14,12 +14,11 @@ const getWeatherData = async (lat: number | string, lon: number | number) => {
     return getWeatherFromLocation(lat, lon)
         .then(weather => {
             const { _5_day_weather, sorted_days } = distributeWeather(weather.list);
-            const today = new Date().toLocaleDateString('en-US', { weekday: "long" });
+            // const today = new Date().toLocaleDateString('en-US', { weekday: "long" });
 
             return {
                 _5_day_weather,
                 sorted_days,
-                today,
                 location: weather.city as any
             }
         });

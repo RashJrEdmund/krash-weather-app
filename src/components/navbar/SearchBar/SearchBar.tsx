@@ -61,6 +61,7 @@ export default function SearchBar({}: Props) {
               if (searchVal.trim()) setShowOverlay(true);
             }}
           />
+
           <SearchIcon />
         </div>
 

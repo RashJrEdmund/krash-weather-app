@@ -38,7 +38,7 @@ const getSortedDays = (array_days: any) => array_days.sort((a: any, z: any) => n
 export const distributeWeather = (weather_arr: Array<any>) => {
     if (!weather_arr) return {};
 
-    const NWP = 8 // NWP means number of weather objects per day. 8 for 8 weather forecasts per day.
+    const NWP = 8; // NWP means number of weather objects per day. 8 for 8 weather forecasts per day.
 
     const { today, restOfDays } = getWeatherToday(weather_arr);
 
@@ -46,8 +46,8 @@ export const distributeWeather = (weather_arr: Array<any>) => {
 
     const firstDayInForecast = getCurrentWeekDay(date) // to get the first day in the forecast
 
-    const _5_day_weather = {
-        [firstDayInForecast]: today.weatherlist,
+    const _5_day_weather: { [x: string]: any[] } = {
+        ["Today"]: today.weatherlist,
     };
 
     for (let i = 0; i < 5; i++) {

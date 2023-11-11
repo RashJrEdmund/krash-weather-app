@@ -6,7 +6,7 @@ import StyledHome from "./StyledHome";
 import { useWeatherContext } from "@/context/store";
 import { Overlay } from "@/components/atoms/Atoms";
 import { usePathname, useRouter, useParams } from "next/navigation";
-// import LeftSideBar from "@/components/Sidebars/LeftSideBar/LeftSideBar";
+import LeftSideBar from "@/components/Sidebars/LeftSideBar/LeftSideBar";
 
 type Props = { children: React.ReactNode };
 
@@ -15,8 +15,7 @@ export default function Layout({ children }: Props) {
   const router = useRouter();
   const params = useParams();
 
-  const { showMenu, setShowMenu, customAlert, pathname, setPathname } =
-    useWeatherContext();
+  const { showMenu, setShowMenu, customAlert } = useWeatherContext();
   const { alertMsg, AlertComponent } = customAlert as any;
 
   React.useEffect(() => {
@@ -37,7 +36,7 @@ export default function Layout({ children }: Props) {
 
       <StyledHome showMenu={showMenu}>
         <div className="main_left_col">
-          {/* <LeftSideBar /> */}
+          <LeftSideBar />
         </div>
 
         {children}

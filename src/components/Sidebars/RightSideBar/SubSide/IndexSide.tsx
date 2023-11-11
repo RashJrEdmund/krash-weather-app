@@ -1,50 +1,30 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import StyledSubSide from "./StyledSubSide";
 import { UserIcon } from "@/components/atoms/Icons";
 import { useWeatherContext } from "@/context/store";
 import { usePathname, useRouter } from "next/navigation";
-import { DAYS } from "@/services/constants";
-import { getDay } from "@/services/utils";
 
 type Props = { setIndexSide: any };
 
 export default function IndexSide({ setIndexSide }: Props) {
   const {
     _5_days,
-    weatherData,
+    setCurrentDAy,
     setTime,
-    setDay,
-    setDayTime,
     customAlert: { displayAlert },
   } = useWeatherContext();
   const router = useRouter();
-  const [dates, setDates] = useState<any[]>([]);
 
-  const changeDay = (day: string, dayRoute: number, actualDay: any) => {
-    displayAlert(
-      `Weather set for ${
-        day === "day_1" ? "Today" : `${day.replace("_", " ")}`
-      } `
-    );
+  const changeDay = (day: string, dayRoute: number) => {
+    displayAlert(`Weather set for ${day}`);
 
-    setDay(actualDay || day);
     setTime("Hs:Mm");
+    setCurrentDAy(day);
 
     router.replace(`/krashweather/${dayRoute}/1`);
-    setDayTime({ time: 0, day });
   };
-
-  useEffect(() => {
-    if (weatherData) {
-      const days = DAYS.map((day) =>
-        getDay(new Date(weatherData[`${day}`][0].dt_txt))
-      );
-
-      setDates(days);
-    }
-  }, [weatherData]);
 
   return (
     <StyledSubSide>
@@ -53,13 +33,11 @@ export default function IndexSide({ setIndexSide }: Props) {
       <ul className="mid_section">
         {_5_days?.map((day, i) => (
           <li
-            title={`weather ${i !== 0 ? "on" : "for"} ${
-              dates[i] || day.replace("_", " ")
-            }`}
+            title={`weather ${i !== 0 ? "on" : "for"} ${day}`}
             key={day}
-            onClick={() => changeDay(day, i + 1, dates[i])}
+            onClick={() => changeDay(day, i + 1)}
           >
-            <h3>{dates[i] || day.replace("_", " ")}</h3>
+            <h3>{day}</h3>
             <p>T &deg;</p>
           </li>
         ))}

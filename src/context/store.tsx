@@ -78,9 +78,9 @@ interface IAppContext {
 const AppContext = createContext<IAppContext | null>(null);
 
 const WeatherContextProvider = ({ children }: IProps) => {
-    const [_5_days, set5Days] = useState<Array<string>>(["today", "day_2", "day_3", "day_4", "day_5"]);
+    const [_5_days, set5Days] = useState<Array<string>>(["Today", "Day 2", "Day 3", "Day 4", "Day 5"]);
     const [weatherForeCast, setWeatherForeCast] = useState<IweatherForecast | null>(null);
-    const [currentDay, setCurrentDAy] = useState<string>(""); // is equivalent to new Date().toLocaleDateString('en-US', { weekday: "long" });
+    const [currentDay, setCurrentDAy] = useState<string>("Today"); // is equivalent to new Date().toLocaleDateString('en-US', { weekday: "long" });
     const [todaysWeather, setTodaysWeather] = useState<Array<any>>([]);
     const [location, setLocation] = useState<Ilocation | null>(null);
     const [currentWeather, setCurrentWeather] = useState<IcurrentWeather | null>(null);  // the users current weather. not a forecast
@@ -100,14 +100,13 @@ const WeatherContextProvider = ({ children }: IProps) => {
     const updateWeatherStates = (lat: number, lon: number) => {
         getWeatherData(lat, lon)
             .then((res) => {
-                const { _5_day_weather, sorted_days, today, location: loc } = res; // loc is an alias to location to avoid conflicting with location from context
+                const { _5_day_weather, sorted_days, location: loc } = res; // loc is an alias to location to avoid conflicting with location from context
 
-                if (!(_5_day_weather && sorted_days && today && loc)) return null;
+                if (!(_5_day_weather && sorted_days && loc)) return null;
 
                 setWeatherForeCast(_5_day_weather as IweatherForecast);
-                setTodaysWeather(_5_day_weather[today]);
+                setTodaysWeather(_5_day_weather["Today"]);
                 set5Days([...sorted_days]);
-                setCurrentDAy(today);
                 setLocation(loc);
             })
             .catch(console.error);
@@ -126,7 +125,6 @@ const WeatherContextProvider = ({ children }: IProps) => {
             icon: res.weather[0].icon,
         }
 
-        console.log("getCurrentWeather res", res);
         setCurrentWeather(res_data);
 
         updateWeatherStates(lat, lon);
@@ -136,13 +134,9 @@ const WeatherContextProvider = ({ children }: IProps) => {
         (async () => {
             const location = await getDefaultGeoLocation(); // get's user's geo location on start.
 
-            // console.log("location", location); // see ipgeolocation response.
             if (!location) return;
 
             const { latitude: lat, longitude: lon } = location;
-
-            console.clear();
-            console.log("location res", location)
 
             updateStatesAndCurrentLocation(lat, lon);
         })();

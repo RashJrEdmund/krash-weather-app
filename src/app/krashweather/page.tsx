@@ -28,6 +28,7 @@ export default function Krashweather() {
     <StyledMidSection url={SlideData[photoIndx]}>
 
       <div className="display_section">
+        
         <NavBar />
         {/* <Weather /> */}
 

@@ -7,17 +7,20 @@ import StyledLeftSide from "./StyledLeftSide";
 
 type Props = {};
 
-export default function LeftSideBar({}: Props) {
-  const [hours, setHours] = useState<any>(null);
+export default function LeftSideBar({ }: Props) {
+  const [navHourData, setNavHourData] = useState<{
+    hour: string,
+    condition: string,
+    temp: string
+  }[] | null>(null);
+
   const router = useRouter();
   const pathName = usePathname();
 
-  const { setShowMenu, dayTime, setDayTime, setTime, weatherData } =
-    useWeatherContext();
+  const { setShowMenu, todaysWeather, setTime } = useWeatherContext();
 
   const choseTime = (ind: number, time: string) => {
     router.push(`/krashweather/1/${ind + 1}`);
-    setDayTime({ day: "day_1", time: ind });
     setTime(time);
   };
 
@@ -26,14 +29,20 @@ export default function LeftSideBar({}: Props) {
   }, [pathName]);
 
   useEffect(() => {
-    if (weatherData) {
-      const hrs = weatherData[`${dayTime.day}`].map((hrObj: any) => hrObj);
+    if (todaysWeather) {
+      const hrs = todaysWeather.map(({ dt_txt, main, weather }: any) => {
+        return {
+          hour: dt_txt.split(" ").pop(),
+          condition: weather[0].description,
+          temp: main.temp,
+        }
+      });
 
-      setHours(hrs);
-
-      // console.log(weatherData, hrs);
+      setNavHourData(hrs);
     }
-  }, [dayTime, weatherData]);
+
+    console.log("todaysWeather in leftside bar", todaysWeather);
+  }, [todaysWeather]);
 
   return (
     <StyledLeftSide>
@@ -41,22 +50,22 @@ export default function LeftSideBar({}: Props) {
         Krash Weather app
       </h3>
 
-      <p>8 hours forecast a Day</p>
+      <p>8 hour forecast a Day</p>
 
       <ul>
-        {hours?.map((hour: any, i: number) => (
+        {navHourData?.map(({ hour, condition, temp }: any, i: number) => (
           <li
-            key={hour.dt_txt}
-            onClick={() => choseTime(i, hour.dt_txt.split(" ").pop())}
+            key={hour}
+            onClick={() => choseTime(i, hour)}
           >
             <h4>
-              Hour: <span>{hour.dt_txt.split(" ").pop()}</span>
+              Hour: <span> {hour}</span>
             </h4>
             <p>
-              Condition: <span>{hour.weather[0].description}</span>
+              Condition: <span> {condition || ""}</span>
             </p>
             <p>
-              temp: <span>{hour.main.temp} &deg;</span>
+              temp: <span> {temp || ""} &deg;</span>
             </p>
           </li>
         ))}
