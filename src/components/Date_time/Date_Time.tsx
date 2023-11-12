@@ -30,16 +30,16 @@ const StyledDate_Time = styled.div`
 type Props = {};
 
 export default function Date_Time({}: Props) {
-  const { day, time, setDay } = useWeatherContext();
+  const { currentDay, currentTime } = useWeatherContext();
 
   useEffect(() => {
     // get right day
-  }, [time]);
+  }, [currentTime]);
 
   return (
     <StyledDate_Time>
-      <span className="day">{day}</span>
-      <span className="hour">{time}</span>
+      <span className="day">{currentDay}</span>
+      <span className="hour">{currentTime}</span>
     </StyledDate_Time>
   );
 }

@@ -1,36 +1,48 @@
 "use client";
 
 import { useWeatherContext } from "@/context/store";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import StyledLeftSide from "./StyledLeftSide";
 
 type Props = {};
 
+interface IHourData {
+  hour: string,
+  condition: string,
+  temp: string
+}
+
 export default function LeftSideBar({ }: Props) {
-  const [navHourData, setNavHourData] = useState<{
-    hour: string,
-    condition: string,
-    temp: string
-  }[] | null>(null);
+  const [navHourData, setNavHourData] = useState<IHourData[] | null>(null);
 
   const router = useRouter();
-  const pathName = usePathname();
+  const params = useParams();
 
-  const { setShowMenu, todaysWeather, setTime } = useWeatherContext();
+  const {
+    setShowMenu,
+    todaysWeather,
+    setCurrentTime,
+    setCurrentWeather,
+    weatherForeCast,
+    currentDay,
+  } = useWeatherContext();
 
   const choseTime = (ind: number, time: string) => {
-    router.push(`/krashweather/1/${ind + 1}`);
-    setTime(time);
+    const hourRoute = ind + 1;
+    const prevDayRoute= params.day.split("/").shift();
+
+    router.push(`/krashweather/${prevDayRoute}/${hourRoute}`);
+    setCurrentTime(time);
+
+    if (weatherForeCast) {
+      setCurrentWeather(weatherForeCast[currentDay][ind]); // whenever the day changes, sets current weather to first hour on that day.
+    }
   };
 
   useEffect(() => {
-    // console.log({ pathName });
-  }, [pathName]);
-
-  useEffect(() => {
     if (todaysWeather) {
-      const hrs = todaysWeather.map(({ dt_txt, main, weather }: any) => {
+      const hrs: IHourData[] = todaysWeather.map(({ dt_txt, main, weather }: any) => {
         return {
           hour: dt_txt.split(" ").pop(),
           condition: weather[0].description,
@@ -38,10 +50,11 @@ export default function LeftSideBar({ }: Props) {
         }
       });
 
+
+      setCurrentTime(hrs[0]?.hour);
+
       setNavHourData(hrs);
     }
-
-    console.log("todaysWeather in leftside bar", todaysWeather);
   }, [todaysWeather]);
 
   return (

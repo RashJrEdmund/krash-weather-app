@@ -3,24 +3,54 @@
 import { useWeatherContext } from "@/context/store";
 import React, { useEffect, useState } from "react";
 import StyledBase from "./StyledBase";
-import { updateBaseData } from "@/services/weather";
 import { StatsIcon } from "../atoms/Icons";
 
 type Props = {};
 
-export default function Base({}: Props) {
+interface IbaseFields {
+  quantity: string,
+  magnetude: string | number,
+  unit: string,
+}
+
+export default function Base({ }: Props) {
   const {
-    weatherData,
-    dayTime,
+    currentWeather,
     setShowMenu,
     customAlert: { displayAlert },
   } = useWeatherContext();
 
-  const [baseData, setBaseData] = useState<any>(null);
+  const [baseData, setBaseData] = useState<IbaseFields[] | null>(null);
 
   useEffect(() => {
-    weatherData && updateBaseData(weatherData, dayTime, setBaseData);
-  }, [dayTime, weatherData]);
+    if (currentWeather) {
+      const baseArr: IbaseFields[] = [
+        {
+          quantity: "Wind Speed",
+          magnetude: currentWeather.wind.speed,
+          unit: "m/s",
+        },
+        {
+          quantity: "Pressure",
+          magnetude: currentWeather.main.pressure,
+          unit: "hPa",
+        },
+        {
+          quantity: "Humidity",
+          magnetude: currentWeather.main.humidity,
+          unit: "%",
+        },
+        {
+          quantity: "Visibility",
+          magnetude: currentWeather.visibility,
+          unit: "km",
+        },
+      ];
+
+      setBaseData(baseArr);
+    }
+
+  }, [currentWeather]);
 
   return (
     <>

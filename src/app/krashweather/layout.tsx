@@ -5,22 +5,14 @@ import Sidebar from "@/components/Sidebars/RightSideBar/Sidebar";
 import StyledHome from "./StyledHome";
 import { useWeatherContext } from "@/context/store";
 import { Overlay } from "@/components/atoms/Atoms";
-import { usePathname, useRouter, useParams } from "next/navigation";
 import LeftSideBar from "@/components/Sidebars/LeftSideBar/LeftSideBar";
+import Krashweather from "./page";
 
 type Props = { children: React.ReactNode };
 
 export default function Layout({ children }: Props) {
-  const routname = usePathname();
-  const router = useRouter();
-  const params = useParams();
-
   const { showMenu, setShowMenu, customAlert } = useWeatherContext();
   const { alertMsg, AlertComponent } = customAlert as any;
-
-  React.useEffect(() => {
-    // console.log(router, params, routname);
-  }, [routname]);
 
   return (
     <>
@@ -39,7 +31,9 @@ export default function Layout({ children }: Props) {
           <LeftSideBar />
         </div>
 
-        {children}
+        {/* {children} */}
+        <Krashweather /> {/* replayce this with childre */}
+
 
         <div className="main_right_col">
           <Sidebar />

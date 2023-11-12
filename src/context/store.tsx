@@ -9,22 +9,18 @@ interface IProps {
     children: React.ReactNode,
 }
 
-interface IcurrentWeather {
-    location: string,
-    temp: string,
-    description: string,
-    wind_speed: string,
-    pressure: string,
-    humidity: string,
-    icon: string,
-}
-
 interface IweatherForecast {
     [x: string]: any[]
 }
 
 interface Ilocation {
-    name: string,
+    id: string,
+    location: string,
+    country: string,
+    population: string,
+    sunrise: string,
+    sunset: string,
+    timezone: string,
 }
 
 interface IShowMenuType {
@@ -48,11 +44,9 @@ interface IAppContext {
     weatherForeCast: IweatherForecast | null,
     setWeatherForeCast: React.Dispatch<React.SetStateAction<IweatherForecast | null>>
 
-    currentWeather: IcurrentWeather | null,
+    currentWeather: any,
+    setCurrentWeather: React.Dispatch<React.SetStateAction<any>>,
     location: Ilocation | null,
-
-    currentDay: string,
-    setCurrentDAy: React.Dispatch<React.SetStateAction<string>>
 
     todaysWeather: Array<any>,
     setTodaysWeather: React.Dispatch<React.SetStateAction<Array<any>>>,
@@ -63,11 +57,11 @@ interface IAppContext {
     showOverlay: boolean,
     setShowOverlay: React.Dispatch<React.SetStateAction<boolean>>,
 
-    time: string,
-    setTime: React.Dispatch<React.SetStateAction<string>>,
+    currentDay: string,
+    setCurrentDAy: React.Dispatch<React.SetStateAction<string>>
 
-    day: string,
-    setDay: React.Dispatch<React.SetStateAction<string>>,
+    currentTime: string,
+    setCurrentTime: React.Dispatch<React.SetStateAction<string>>,
 
     error: boolean,
     customAlert: ICustomAlert,
@@ -83,12 +77,12 @@ const WeatherContextProvider = ({ children }: IProps) => {
     const [currentDay, setCurrentDAy] = useState<string>("Today"); // is equivalent to new Date().toLocaleDateString('en-US', { weekday: "long" });
     const [todaysWeather, setTodaysWeather] = useState<Array<any>>([]);
     const [location, setLocation] = useState<Ilocation | null>(null);
-    const [currentWeather, setCurrentWeather] = useState<IcurrentWeather | null>(null);  // the users current weather. not a forecast
+    const [currentWeather, setCurrentWeather] = useState<any>(null);  // the users current weather. not a forecast
 
     const [error, setError] = useState<boolean>(false);
     const [showOverlay, setShowOverlay] = useState<boolean>(false);
-    const [time, setTime] = useState<string>("Hs:Mm:Ss");
-    const [day, setDay] = useState<string>("Today");
+    const [currentTime, setCurrentTime] = useState<string>("Hs:Mm:Ss"); // for the current time display at the bottom right corner of the main display.
+    const [day, setDay] = useState<string>("Today"); // for the current day display at the bottom right cornner of the main display
     const [showMenu, setShowMenu] = useState<IShowMenuType>({
         left: false,
         right: false,
@@ -107,25 +101,24 @@ const WeatherContextProvider = ({ children }: IProps) => {
                 setWeatherForeCast(_5_day_weather as IweatherForecast);
                 setTodaysWeather(_5_day_weather["Today"]);
                 set5Days([...sorted_days]);
-                setLocation(loc);
+
+                setLocation({
+                    id: loc?.id,
+                    location: loc?.name,
+                    country: loc?.country,
+                    population: loc?.population,
+                    sunrise: loc?.sunrise,
+                    sunset: loc?.sunset,
+                    timezone: loc?.timezone,
+                });
+
+                setCurrentWeather(_5_day_weather["Today"][0]);
             })
             .catch(console.error);
     }
 
     const updateStatesAndCurrentLocation = async (lat: number, lon: number) => {
         const res = await getCurrentWeather(lat, lon);
-
-        const res_data: IcurrentWeather = {
-            location: res.name,
-            temp: res.main.temp,
-            description: res.weather[0].description,
-            wind_speed: res.wind.speed,
-            pressure: res.main.pressure,
-            humidity: res.main.humidity,
-            icon: res.weather[0].icon,
-        }
-
-        setCurrentWeather(res_data);
 
         updateWeatherStates(lat, lon);
     }
@@ -145,33 +138,35 @@ const WeatherContextProvider = ({ children }: IProps) => {
     useEffect(() => {
         if (currentDay && weatherForeCast) {
             setTodaysWeather(weatherForeCast[currentDay]);
+            setCurrentWeather(weatherForeCast[currentDay][0]); // whenever the day changes, sets current weather to first hour on that day.
         }
     }, [currentDay]);
 
-    useEffect(() => {
-        console.log({
-            _5_days,
-            currentWeather,
-            currentDay,
-            weatherForeCast,
-            todaysWeather
-        })
-    }, [_5_days,
-        currentWeather,
-        currentDay,
-        weatherForeCast,
-        todaysWeather
-    ]);
+    // useEffect(() => {
+    //     console.log({
+    //         _5_days,
+    //         currentWeather,
+    //         currentDay,
+    //         weatherForeCast,
+    //         todaysWeather,
+    //         location
+    //     })
+    // }, [_5_days,
+    //     currentWeather,
+    //     currentDay,
+    //     weatherForeCast,
+    //     todaysWeather,
+    //     location
+    // ]);
 
     return <AppContext.Provider value={{
         _5_days,
         set5Days,
 
         currentWeather,
-        location,
+        setCurrentWeather,
 
-        currentDay,
-        setCurrentDAy,
+        location,
 
         weatherForeCast,
         setWeatherForeCast,
@@ -185,11 +180,11 @@ const WeatherContextProvider = ({ children }: IProps) => {
         showOverlay,
         setShowOverlay,
 
-        time,
-        setTime,
+        currentDay,
+        setCurrentDAy,
 
-        day,
-        setDay,
+        currentTime,
+        setCurrentTime,
 
         error,
 

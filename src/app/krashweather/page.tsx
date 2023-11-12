@@ -1,12 +1,12 @@
 "use client"
 
 import React from "react";
-// import Date_Time from "@/components/Date_time/Date_Time";
+import Date_Time from "@/components/Date_time/Date_Time";
 import NavBar from "@/components/navbar/NavBar";
-// import Weather from "@/components/weather/Weather";
+import Weather from "@/components/weather/Weather";
 import { SlideData } from "@/images";
 import StyledMidSection from "./StyledMidSection";
-// import Base from "@/components/base/Base";
+import Base from "@/components/base/Base";
 
 export default function Krashweather() {
   const [photoIndx, setPhotoIndx] = React.useState<number>(0);
@@ -30,12 +30,12 @@ export default function Krashweather() {
       <div className="display_section">
         
         <NavBar />
-        {/* <Weather /> */}
+        <Weather />
 
-        {/* <Date_Time /> */}
+        <Date_Time />
       </div>
 
-      {/* <Base /> */}
+      <Base />
     </StyledMidSection>
   )
 }

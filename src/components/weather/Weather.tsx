@@ -9,33 +9,29 @@ import { LocationIcon } from "../atoms/Icons";
 type Props = {};
 
 export default function Weather({ }: Props) {
-  const { currentWeather } = useWeatherContext();
-
-  useEffect(() => {
-    console.log({ currentWeather });
-  }, [currentWeather]);
+  const { currentWeather, location } = useWeatherContext();
 
   return (
     <StyledWeather>
       <div className="weather_col_1">
         <p className="location">
           <LocationIcon />
-          {currentWeather?.location || "Location"}
+          {location?.location || "Location"}
         </p>
 
         <div className="desc_img">
           <div className="description">
-            <p className="main">{weather?.weather[0].main || "Weather"}</p>
+            <p className="main">{currentWeather?.weather[0].main || "Weather"}</p>
             <p className="exp">
-              {weather?.weather[0].description || "Description"}
+              {currentWeather?.weather[0].description || "Description"}
             </p>
           </div>
 
-          {weather && (
+          {currentWeather && (
             <Image
-              src={`http://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`}
+              src={`http://openweathermap.org/img/wn/${currentWeather?.weather[0].icon}@2x.png`}
               alt="weather icon"
-              title={`${weather?.weather[0].description}`}
+              title={`${currentWeather?.weather[0].description}`}
               height="160"
               width="180"
             />
@@ -45,7 +41,7 @@ export default function Weather({ }: Props) {
 
       <div className="weather_col_2">
         <div className="temp">
-          temp <span> {weather?.main.temp || "T"} &deg;</span>
+          temp <span> {currentWeather?.main.temp || "T"} &deg;</span>
         </div>
       </div>
     </StyledWeather>
