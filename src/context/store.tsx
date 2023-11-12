@@ -4,6 +4,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 import getWeatherData, { getCurrentWeather } from "@/services/weather/weather.api";
 import { getDefaultGeoLocation } from "@/services/location";
 import useAlert from "@/hooks/UseAlert";
+import { useParams } from "next/navigation";
 
 interface IProps {
     children: React.ReactNode,
@@ -58,7 +59,7 @@ interface IAppContext {
     setShowOverlay: React.Dispatch<React.SetStateAction<boolean>>,
 
     currentDay: string,
-    setCurrentDAy: React.Dispatch<React.SetStateAction<string>>
+    setCurrentDAy: React.Dispatch<React.SetStateAction<string>>,
 
     currentTime: string,
     setCurrentTime: React.Dispatch<React.SetStateAction<string>>,
@@ -149,14 +150,14 @@ const WeatherContextProvider = ({ children }: IProps) => {
     //         currentDay,
     //         weatherForeCast,
     //         todaysWeather,
-    //         location
+    //         location,
     //     })
     // }, [_5_days,
     //     currentWeather,
     //     currentDay,
     //     weatherForeCast,
     //     todaysWeather,
-    //     location
+    //     location,
     // ]);
 
     return <AppContext.Provider value={{

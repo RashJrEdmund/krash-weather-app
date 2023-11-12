@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import StyledSubSide from "./StyledSubSide";
 import { UserIcon } from "@/components/atoms/Icons";
 import { useWeatherContext } from "@/context/store";
@@ -24,6 +24,7 @@ export default function IndexSide({ setIndexSide }: Props) {
 
     router.replace(`/krashweather/${dayRoute}/${1}`); // resetting the current route time each day, to 1.
   };
+
 
   return (
     <StyledSubSide>
