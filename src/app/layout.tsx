@@ -1,21 +1,44 @@
-import './globals.css'
-import { Inter } from 'next/font/google'
+import "./globals.css";
+import { Inter } from "next/font/google";
+import { WeatherContextProvider } from "@/context/store";
+import { Metadata } from "next";
+import { APP_URL } from "@/services/constants";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title: 'Krash-weather',
-  description: 'Weather app',
-}
+export const metadata: Metadata = {
+  title: "Krash-weather",
+  description: "Weather app",
+  applicationName: "Krash-weather app",
+  authors: [{
+    url: "https://twitter.com/orashus",
+    name: "Rash"
+  }],
+  appLinks: {
+    web: {
+      url: APP_URL,
+      should_fallback: true,
+    },
+  }
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
-  )
+    <WeatherContextProvider>
+      <html lang="en">
+        <head>
+          <link rel="icon" href="/favicon.png" />
+          <meta
+            httpEquiv="Content-Security-Policy"
+            content="upgrade-insecure-requests"
+          />
+        </head>
+        <body className={inter.className}>{children}</body>
+      </html>
+    </WeatherContextProvider>
+  );
 }
