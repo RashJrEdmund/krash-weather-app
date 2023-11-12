@@ -7,6 +7,13 @@ const StyledLeftSide = styled(StyledSideBar)`
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
+    margin: 10px 0 0;
+    height: 75vh;
+    overflow: auto;
+
+    ::-webkit-scrollbar {
+      display: none
+    }
 
     li {
       width: 100%;
@@ -20,7 +27,7 @@ const StyledLeftSide = styled(StyledSideBar)`
       }
 
       p {
-        margin: 2px 0 0;
+        margin: 9px 0 0;
       }
 
       span {

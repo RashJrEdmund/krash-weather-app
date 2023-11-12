@@ -1,12 +1,25 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { WeatherContextProvider } from "@/context/store";
+import { Metadata } from "next";
+import { APP_URL } from "@/services/constants";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Krash-weather",
   description: "Weather app",
+  applicationName: "Krash-weather app",
+  authors: [{
+    url: "https://twitter.com/orashus",
+    name: "Rash"
+  }],
+  appLinks: {
+    web: {
+      url: APP_URL,
+      should_fallback: true,
+    },
+  }
 };
 
 export default function RootLayout({
