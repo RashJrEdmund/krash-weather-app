@@ -1,6 +1,7 @@
 import { API_KEY } from "../constants";
 import { distributeWeather } from "./functions";
 
+// getting actual forecast
 const getWeatherFromLocation = async (lat: number | string, lon: number | string) => {
     try {
         const weather_url = `http://api.openweathermap.org/data/2.5/forecast?units=metric&&lat=${lat}&lon=${lon}&appid=${API_KEY}`;
@@ -24,6 +25,7 @@ const getWeatherData = async (lat: number | string, lon: number | number) => {
         });
 }
 
+// current weather api. not used at all.
 const getCurrentWeather = async (lat: number | string, lon: number | string) => {
     try {
         const search_url = `https://api.openweathermap.org/data/2.5/weather?units=metric&&lat=${lat}&lon=${lon}&appid=${API_KEY}`

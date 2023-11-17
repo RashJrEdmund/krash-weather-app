@@ -44,6 +44,11 @@ export default function SearchBar({}: Props) {
     return () => clearInterval(intId);
   }, [searchVal]);
 
+  React.useEffect(() => {
+    console.clear();
+    console.log({locationData})
+  }, [locationData]);
+
   return (
     <>
       {showOverlay && (

@@ -11,6 +11,7 @@ type Props = { setIndexSide: any };
 export default function IndexSide({ setIndexSide }: Props) {
   const {
     _5_days,
+    currentDay,
     setCurrentDAy,
     customAlert: { displayAlert },
   } = useWeatherContext();
@@ -34,6 +35,7 @@ export default function IndexSide({ setIndexSide }: Props) {
         {_5_days?.map((day, i) => (
           <li
             title={`weather ${i !== 0 ? "on" : "for"} ${day}`}
+            className={currentDay === day ? "current_day" : ""}
             key={day}
             onClick={() => changeDay(day, i + 1)}
           >

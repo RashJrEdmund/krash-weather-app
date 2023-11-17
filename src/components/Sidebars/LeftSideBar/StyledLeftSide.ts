@@ -21,6 +21,17 @@ const StyledLeftSide = styled(StyledSideBar)`
       margin: 17px 0 0;
       cursor: pointer;
       border-top: 1px solid #808080;
+      transition: 300ms;
+
+      &:hover {
+        background: linear-gradient(to right, transparent, #00800005, grey);
+        border-radius: 0 6px 6px 0;
+      }
+
+      &.current_time {
+        background: linear-gradient(to right, transparent, #00800005, green);
+        border-radius: 0 6px 6px 0;
+      }
 
       h4 {
         font-weight: 19px;
