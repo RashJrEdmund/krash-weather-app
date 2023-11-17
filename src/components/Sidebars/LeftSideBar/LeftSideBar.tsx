@@ -22,10 +22,11 @@ export default function LeftSideBar({ }: Props) {
   const {
     setShowMenu,
     todaysWeather,
+    currentTime,
+    currentDay,
     setCurrentTime,
     setCurrentWeather,
     weatherForeCast,
-    currentDay,
   } = useWeatherContext();
 
   const choseTime = (ind: number, time: string) => {
@@ -69,6 +70,7 @@ export default function LeftSideBar({ }: Props) {
         {navHourData?.map(({ hour, condition, temp }: any, i: number) => (
           <li
             key={hour}
+            className={currentTime === hour ? "current_time" : ""}
             onClick={() => choseTime(i, hour)}
           >
             <h4>

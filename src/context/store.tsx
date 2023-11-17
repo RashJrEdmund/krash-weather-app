@@ -119,7 +119,9 @@ const WeatherContextProvider = ({ children }: IProps) => {
     }
 
     const updateStatesAndCurrentLocation = async (lat: number, lon: number) => {
-        const res = await getCurrentWeather(lat, lon);
+        // const res = await getCurrentWeather(lat, lon);
+
+        // console.log({res})
 
         updateWeatherStates(lat, lon);
     }
