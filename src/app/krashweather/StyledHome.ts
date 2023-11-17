@@ -21,32 +21,6 @@ const StyledHome = styled.main<StyledProps>`
     min-height: 90vh;
   }
 
-  .main_mid_col {
-    min-height: 90vh;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 30%;
-    justify-content: space-between;
-    align-items: flex-start;
-
-    .display_section {
-      background: linear-gradient(to bottom, #00000070, #00000070, #00000070),
-        url(${({ url }) => url});
-      box-shadow: 0 0 10px #1d2432;
-      background-position: center;
-      background-size: cover;
-      position: relative;
-      padding: 10px;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: space-between;
-      padding: 10px 10px 70px;
-    }
-  }
-
   .main_right_col {
     border-radius: 0 var(--app-border) var(--app-border) 0;
     box-shadow: 0 0 10px #1d2432;
@@ -58,10 +32,6 @@ const StyledHome = styled.main<StyledProps>`
 
   @media only screen and (max-width: 950px) {
     grid-template-columns: 1fr;
-
-    .main_mid_col {
-      grid-template-rows: unset;
-    }
 
     .main_left_col,
     .main_right_col {

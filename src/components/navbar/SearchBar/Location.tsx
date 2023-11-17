@@ -41,23 +41,23 @@ const StyledLocation = styled.div`
   @media only screen and (max-width: 400px) {
     min-width: 250px;
   }
+
+  @media only screen and (min-width: 768px) {
+    transition: 300ms;
+
+    &:hover {
+      transform: translateX(-10%) scale(1.09);
+      box-shadow: 0 5px 5px #f5f5f54f;
+    }
+  }
 `;
 
-// const obj = {
-//   country: "CM",
-//   lat: 6.2108889,
-//   local_names: { fr: "Kumbo", ru: "Кумбо" },
-//   lon: 10.6867788,
-//   name: "Kumbo",
-//   state: "Northwest",
-// };
-
 export default function Location({ location }: Props) {
-  const { getWeather } = useWeatherContext();
+  const { updateStatesAndCurrentLocation } = useWeatherContext();
 
   return (
     <StyledLocation
-      onClick={() => getWeather(location.lon, location.lat)}
+      onClick={() => updateStatesAndCurrentLocation(location.lat, location.lon)}
       title={`look up ${location.state}`}
     >
       <div className="div">

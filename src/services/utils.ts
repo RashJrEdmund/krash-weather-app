@@ -1,58 +1,38 @@
 "use client";
 
-import { DAYS } from "./constants";
-
-export const logText = (data: any) => {
+const logText = (data: any) => {
   const { clear, log } = console;
   clear();
   log({ [`${data}`]: data });
 };
 
-export const getSessionStorage = (key: string) => {
-  const session = sessionStorage.getItem(key);
-  if (session) return JSON.parse(session);
-  return undefined;
+const getCurrentDate = (date: Date) => {
+  // example return: 'Saturday, 1 July 2023'
+  const currentDate = date
+    .toLocaleString(undefined, {
+      dateStyle: "full",
+    })
+
+  return currentDate;
 };
 
-export const setSessionStorage = (key: string, value: any) =>
-  sessionStorage.setItem(key, JSON.stringify(value));
+const getCurrentWeekDay = (date: Date) => {
+  const weekDay = date.toLocaleDateString('en-US', { weekday: "long" });
 
-export const createWeatherData = (data: any, setWeatherData: any) => {
-  const { list } = data;
-  const dayData: any = { name: data.city.name };
+  return weekDay;
+}
 
-  DAYS.forEach((day, i) => (dayData[`${day}`] = list.slice(i, i + 8)));
+const removeSecondsFromTime = (dt_txt: string) => {
+  const time_array: any = new Date(dt_txt).toLocaleTimeString().split(":") || [];
+  const period = time_array.at(-1).slice(-2); // returns either AM or PM
+  time_array[time_array.length - 1] = period;
 
-  setWeatherData({ ...dayData });
-};
+  return time_array.join(":");
+}
 
-export const updateBaseData = (
-  weatherData: any,
-  dayTime: { day: string; time: number },
-  setBaseData: any
-) => {
-  const baseD = [
-    {
-      quantity: "Wind Speed",
-      magnetude: weatherData[`${dayTime.day}`][dayTime.time].wind.speed,
-      unit: "m/s",
-    },
-    {
-      quantity: "Pressure",
-      magnetude: weatherData[`${dayTime.day}`][dayTime.time].main.pressure,
-      unit: "hPa",
-    },
-    {
-      quantity: "Humidity",
-      magnetude: weatherData[`${dayTime.day}`][dayTime.time].main.humidity,
-      unit: "%",
-    },
-    {
-      quantity: "Visibility",
-      magnetude: weatherData[`${dayTime.day}`][dayTime.time].visibility,
-      unit: "km",
-    },
-  ];
-
-  setBaseData([...baseD]);
-};
+export {
+  logText,
+  getCurrentDate,
+  getCurrentWeekDay,
+  removeSecondsFromTime,
+}

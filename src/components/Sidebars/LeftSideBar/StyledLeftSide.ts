@@ -7,6 +7,13 @@ const StyledLeftSide = styled(StyledSideBar)`
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
+    margin: 10px 0 0;
+    height: 75vh;
+    overflow: auto;
+
+    ::-webkit-scrollbar {
+      display: none
+    }
 
     li {
       width: 100%;
@@ -14,13 +21,24 @@ const StyledLeftSide = styled(StyledSideBar)`
       margin: 17px 0 0;
       cursor: pointer;
       border-top: 1px solid #808080;
+      transition: 300ms;
+
+      &:hover {
+        background: linear-gradient(to right, transparent, #00800005, grey);
+        border-radius: 0 6px 6px 0;
+      }
+
+      &.current_time {
+        background: linear-gradient(to right, transparent, #00800005, green);
+        border-radius: 0 6px 6px 0;
+      }
 
       h4 {
         font-weight: 19px;
       }
 
       p {
-        margin: 2px 0 0;
+        margin: 9px 0 0;
       }
 
       span {

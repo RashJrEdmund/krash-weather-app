@@ -43,6 +43,36 @@ const StyledSubSide = styled.div`
       flex-direction: column;
       align-items: flex-start;
 
+      &:hover {
+        position: relative;
+
+        &::after {
+          content: " ";
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 2px;
+          height: 100%;
+          background: grey;
+          border-radius: 4px;
+        }
+      }
+
+      &.current_day {
+        position: relative;
+
+        &::after {
+          content: " ";
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 2px;
+          height: 100%;
+          background-color: gold;
+          border-radius: 4px;
+        }
+      }
+
       h3 {
       }
     }
@@ -50,7 +80,6 @@ const StyledSubSide = styled.div`
 
   .user_button {
     width: 100%;
-    /* margin: 4rem 0 0; */
     font-size: 19px;
     cursor: pointer;
     white-space: nowrap;
@@ -90,10 +119,6 @@ const StyledSubSide = styled.div`
       overflow: auto;
       padding: 0 0 30px;
       margin: 10px 0 0;
-
-      li:hover {
-        border-right: 1px solid #fff;
-      }
     }
   }
 `;

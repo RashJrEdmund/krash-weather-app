@@ -1,37 +1,62 @@
 "use client";
 
 import { useWeatherContext } from "@/context/store";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import StyledLeftSide from "./StyledLeftSide";
 
 type Props = {};
 
-export default function LeftSideBar({}: Props) {
-  const [hours, setHours] = useState<any>(null);
+interface IHourData {
+  hour: string,
+  condition: string,
+  temp: string
+}
+
+export default function LeftSideBar({ }: Props) {
+  const [navHourData, setNavHourData] = useState<IHourData[] | null>(null);
+
   const router = useRouter();
-  const pathName = usePathname();
+  const params = useParams();
 
-  const { setShowMenu, dayTime, setDayTime, weatherData } = useWeatherContext();
+  const {
+    setShowMenu,
+    todaysWeather,
+    currentTime,
+    currentDay,
+    setCurrentTime,
+    setCurrentWeather,
+    weatherForeCast,
+  } = useWeatherContext();
 
-  const choseTime = (ind: number) => {
-    router.push(`/krashweather/2/${ind + 1}`);
-    setDayTime((prev: any) => ({ ...prev, time: ind }));
+  const choseTime = (ind: number, time: string) => {
+    const hourRoute = ind + 1;
+    const prevDayRoute= params.day.split("/").shift();
+
+    router.push(`/krashweather/${prevDayRoute}/${hourRoute}`);
+    setCurrentTime(time);
+
+    if (weatherForeCast) {
+      setCurrentWeather(weatherForeCast[currentDay][ind]); // whenever the day changes, sets current weather to first hour on that day.
+    }
   };
 
   useEffect(() => {
-    console.log({ pathName });
-  }, [pathName]);
+    if (todaysWeather) {
+      const hrs: IHourData[] = todaysWeather.map(({ dt_txt, main, weather }: any) => {
+        return {
+          hour: dt_txt.split(" ").pop(),
+          condition: weather[0].description,
+          temp: main.temp,
+        }
+      });
 
-  useEffect(() => {
-    if (weatherData) {
-      const hrs = weatherData[`${dayTime.day}`].map((hrObj: any) => hrObj);
 
-      setHours(hrs);
+      setCurrentTime(hrs[0]?.hour);
 
-      console.log(weatherData, hrs);
+      setNavHourData(hrs);
     }
-  }, [dayTime, weatherData]);
+  }, [todaysWeather]);
 
   return (
     <StyledLeftSide>
@@ -39,19 +64,23 @@ export default function LeftSideBar({}: Props) {
         Krash Weather app
       </h3>
 
-      <p>8 hours forecast a Day</p>
+      <p>8 hour forecast a Day</p>
 
       <ul>
-        {hours?.map((hour: any, i: number) => (
-          <li key={hour.dt_txt} onClick={() => choseTime(i)}>
+        {navHourData?.map(({ hour, condition, temp }: any, i: number) => (
+          <li
+            key={hour}
+            className={currentTime === hour ? "current_time" : ""}
+            onClick={() => choseTime(i, hour)}
+          >
             <h4>
-              Hour: <span>{hour.dt_txt.split(" ").pop()}</span>
+              Hour: <span> {hour}</span>
             </h4>
             <p>
-              Condition: <span>{hour.weather[0].description}</span>
+              Condition: <span> {condition || ""}</span>
             </p>
             <p>
-              temp: <span>{hour.main.temp} &deg;</span>
+              temp: <span> {temp || ""} &deg;</span>
             </p>
           </li>
         ))}

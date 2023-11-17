@@ -1,58 +1,45 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import StyledSubSide from "./StyledSubSide";
 import { UserIcon } from "@/components/atoms/Icons";
 import { useWeatherContext } from "@/context/store";
-import { usePathname, useRouter } from "next/navigation";
-import { DAYS } from "@/services/constants";
+import { useRouter } from "next/navigation";
 
 type Props = { setIndexSide: any };
 
 export default function IndexSide({ setIndexSide }: Props) {
   const {
-    weatherData,
-    dayTime,
-    setDayTime,
+    _5_days,
+    currentDay,
+    setCurrentDAy,
     customAlert: { displayAlert },
   } = useWeatherContext();
+
   const router = useRouter();
-  const [dates, setDates] = useState<any[]>([]);
 
   const changeDay = (day: string, dayRoute: number) => {
-    displayAlert(
-      `Weather set for ${
-        day === "day_1" ? "Today" : `${day.replace("_", " ")}`
-      } `
-    );
+    displayAlert(`Weather set for ${day}`);
 
-    router.replace(`/krashweather/${dayRoute}/${dayTime.time + 1}`);
-    setDayTime((prev: any) => ({ ...prev, day }));
+    setCurrentDAy(day);
+
+    router.replace(`/krashweather/${dayRoute}/${1}`); // resetting the current route time each day, to 1.
   };
 
-  useEffect(() => {
-    if (weatherData) {
-      const days = DAYS.map((day) => ({
-        day: new Date(weatherData[`${day}`][0].dt_txt).toDateString(),
-        temp: 0,
-      }));
-
-      setDates(days);
-    }
-  }, [weatherData]);
 
   return (
     <StyledSubSide>
       <h4 className="index_h4">5 day forecast </h4>
 
       <ul className="mid_section">
-        {DAYS?.map((day, i) => (
+        {_5_days?.map((day, i) => (
           <li
-            title={`weather on ${dates[i] || day.replace("_", " ")}`}
+            title={`weather ${i !== 0 ? "on" : "for"} ${day}`}
+            className={currentDay === day ? "current_day" : ""}
             key={day}
             onClick={() => changeDay(day, i + 1)}
           >
-            <h3>{dates[i]?.day || day.replace("_", " ")}</h3>
+            <h3>{day}</h3>
             <p>T &deg;</p>
           </li>
         ))}
