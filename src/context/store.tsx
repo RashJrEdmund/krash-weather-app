@@ -64,7 +64,6 @@ interface IAppContext {
     currentTime: string,
     setCurrentTime: React.Dispatch<React.SetStateAction<string>>,
 
-    error: boolean,
     customAlert: ICustomAlert,
 
     updateStatesAndCurrentLocation: (lat: number, lon: number) => Promise<void>
@@ -80,10 +79,8 @@ const WeatherContextProvider = ({ children }: IProps) => {
     const [location, setLocation] = useState<Ilocation | null>(null);
     const [currentWeather, setCurrentWeather] = useState<any>(null);  // the users current weather. not a forecast
 
-    const [error, setError] = useState<boolean>(false);
     const [showOverlay, setShowOverlay] = useState<boolean>(false);
     const [currentTime, setCurrentTime] = useState<string>("Hs:Mm:Ss"); // for the current time display at the bottom right corner of the main display.
-    const [day, setDay] = useState<string>("Today"); // for the current day display at the bottom right cornner of the main display
     const [showMenu, setShowMenu] = useState<IShowMenuType>({
         left: false,
         right: false,
@@ -188,8 +185,6 @@ const WeatherContextProvider = ({ children }: IProps) => {
 
         currentTime,
         setCurrentTime,
-
-        error,
 
         customAlert,
 
