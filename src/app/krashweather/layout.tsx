@@ -32,7 +32,7 @@ export default function Layout({ children }: Props) {
         </div>
 
         {/* {children} */}
-        <Krashweather /> {/* replayce this with childre */}
+        <Krashweather /> {/* replace this with childre */}
 
 
         <div className="main_right_col">
