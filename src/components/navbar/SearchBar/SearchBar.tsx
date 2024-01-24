@@ -46,7 +46,6 @@ export default function SearchBar({}: Props) {
 
   React.useEffect(() => {
     console.clear();
-    console.log({locationData})
   }, [locationData]);
 
   return (
