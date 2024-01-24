@@ -1,11 +1,10 @@
 "use client";
 
 import { useWeatherContext } from "@/context/store";
-import { useRouter, useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import StyledLeftSide from "./StyledLeftSide";
 
-type Props = {};
+interface Props {};
 
 interface IHourData {
   hour: string,
@@ -15,9 +14,6 @@ interface IHourData {
 
 export default function LeftSideBar({ }: Props) {
   const [navHourData, setNavHourData] = useState<IHourData[] | null>(null);
-
-  const router = useRouter();
-  const params = useParams();
 
   const {
     setShowMenu,
@@ -30,10 +26,6 @@ export default function LeftSideBar({ }: Props) {
   } = useWeatherContext();
 
   const choseTime = (ind: number, time: string) => {
-    const hourRoute = ind + 1;
-    const prevDayRoute= params.day.split("/").shift();
-
-    router.push(`/${prevDayRoute}/${hourRoute}`);
     setCurrentTime(time);
 
     if (weatherForeCast) {

@@ -6,7 +6,7 @@ import UserSidebar from "./SubSide/UserSidebar";
 import { useWeatherContext } from "@/context/store";
 import StyledSideBar from "../StyledSidBar";
 
-type Props = {};
+interface Props {};
 
 export default function Sidebar({}: Props) {
   const [indexSide, setIndexSide] = React.useState<boolean>(true);

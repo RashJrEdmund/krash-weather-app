@@ -2,7 +2,7 @@ import { useWeatherContext } from "@/context/store";
 import styled from "@emotion/styled";
 import React from "react";
 
-type Props = { location: any };
+interface Props { location: any };
 
 const StyledLocation = styled.div`
   background: linear-gradient(to bottom, #1d2432e4, #1d2432e4, #1d2432e4);

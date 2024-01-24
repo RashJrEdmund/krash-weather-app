@@ -1,6 +1,6 @@
 import React from "react";
 
-type Props = {};
+interface Props {};
 
 export default function Theme({}: Props) {
   return <div>Theme page</div>;

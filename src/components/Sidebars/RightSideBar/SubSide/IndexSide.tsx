@@ -4,9 +4,8 @@ import React, { useEffect } from "react";
 import StyledSubSide from "./StyledSubSide";
 import { UserIcon } from "@/components/atoms/Icons";
 import { useWeatherContext } from "@/context/store";
-import { useRouter } from "next/navigation";
 
-type Props = { setIndexSide: any };
+interface Props { setIndexSide: any };
 
 export default function IndexSide({ setIndexSide }: Props) {
   const {
@@ -16,14 +15,10 @@ export default function IndexSide({ setIndexSide }: Props) {
     customAlert: { displayAlert },
   } = useWeatherContext();
 
-  const router = useRouter();
-
-  const changeDay = (day: string, dayRoute: number) => {
+  const changeDay = (day: string) => {
     displayAlert(`Weather set for ${day}`);
 
     setCurrentDAy(day);
-
-    router.replace(`/${dayRoute}/${1}`); // resetting the current route time each day, to 1.
   };
 
 
@@ -37,7 +32,7 @@ export default function IndexSide({ setIndexSide }: Props) {
             title={`weather ${i !== 0 ? "on" : "for"} ${day}`}
             className={currentDay === day ? "current_day" : ""}
             key={day}
-            onClick={() => changeDay(day, i + 1)}
+            onClick={() => changeDay(day)}
           >
             <h3>{day}</h3>
             <p>T &deg;</p>

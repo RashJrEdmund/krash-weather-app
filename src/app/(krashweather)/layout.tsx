@@ -31,8 +31,6 @@ export default function Layout({ children }: Props) {
         </div>
 
         {children}
-        {/* <Krashweather /> replace this with children */}
-
 
         <div className="main_right_col">
           <Sidebar />

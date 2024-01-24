@@ -27,7 +27,7 @@ const StyledDate_Time = styled.div`
   }
 `;
 
-type Props = {};
+interface Props {};
 
 export default function Date_Time({}: Props) {
   const { currentDay, currentTime } = useWeatherContext();

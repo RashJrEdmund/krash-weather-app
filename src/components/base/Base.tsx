@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import StyledBase from "./StyledBase";
 import { StatsIcon } from "../atoms/Icons";
 
-type Props = {};
+interface Props {};
 
 interface IbaseFields {
   quantity: string,
