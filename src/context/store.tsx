@@ -127,10 +127,7 @@ const WeatherContextProvider = ({ children }: IProps) => {
         (async () => {
             const location = await getDefaultGeoLocation(); // get's user's geo location on start.
 
-            if (!location) {
-                alert('could not get user location' + JSON.stringify(location));
-                return;
-            };
+            if (!location) return;
 
             const { latitude: lat, longitude: lon } = location;
 
