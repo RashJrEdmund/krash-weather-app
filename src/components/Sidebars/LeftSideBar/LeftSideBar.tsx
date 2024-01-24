@@ -33,7 +33,7 @@ export default function LeftSideBar({ }: Props) {
     const hourRoute = ind + 1;
     const prevDayRoute= params.day.split("/").shift();
 
-    router.push(`/krashweather/${prevDayRoute}/${hourRoute}`);
+    router.push(`/${prevDayRoute}/${hourRoute}`);
     setCurrentTime(time);
 
     if (weatherForeCast) {

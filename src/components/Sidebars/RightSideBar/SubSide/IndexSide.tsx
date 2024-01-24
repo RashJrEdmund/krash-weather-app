@@ -23,7 +23,7 @@ export default function IndexSide({ setIndexSide }: Props) {
 
     setCurrentDAy(day);
 
-    router.replace(`/krashweather/${dayRoute}/${1}`); // resetting the current route time each day, to 1.
+    router.replace(`/${dayRoute}/${1}`); // resetting the current route time each day, to 1.
   };
 
 

@@ -7,10 +7,11 @@ const StyledBase = styled.section`
   background-color: var(--side-bg);
   width: 100%;
   height: fit-content;
-  min-height: max(85%, 170px);
+  /* min-height: min(85%, 170px); */
+  min-height: 100%;
   align-self: flex-end;
   margin: 0 auto;
-  padding: 17px 10px 20px;
+  padding: 17px 10px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -50,8 +51,10 @@ const StyledBase = styled.section`
   @media only screen and (max-width: 950px) {
     border-radius: 0 0 var(--app-border) var(--app-border);
     flex-wrap: wrap;
-    margin: 1rem auto 0;
-    min-height: 170px;
+    padding: 10px;
+    /* margin: 1rem auto 0; */
+    /* min-height: 170px;
+    min-height: 100%; */
 
     .data_col {
       display: flex;
