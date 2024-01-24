@@ -2,7 +2,7 @@ import { StyledProps } from "@/types";
 import styled from "@emotion/styled";
 
 const StyledMidSection = styled.div<StyledProps>`
-  min-height: 90vh;
+  min-height: var(--min-app-height);
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 30%;
@@ -18,12 +18,11 @@ const StyledMidSection = styled.div<StyledProps>`
     position: relative;
     padding: 10px;
     width: 100%;
-    height: 100%;
+    height: calc(100% - 15px);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: space-between;
-    padding: 10px 10px 70px;
+    justify-content: start;
   }
 
   @media only screen and (max-width: 950px) {

@@ -9,7 +9,7 @@ import getData from "@/api/GetData";
 import { useWeatherContext } from "@/context/store";
 import { Overlay } from "@/components/atoms/Atoms";
 
-type Props = {};
+interface Props {};
 export default function SearchBar({}: Props) {
   const [locationData, setLocationData] = React.useState<any>(null);
   const [searchVal, setSearchVal] = React.useState<string>("");
@@ -46,7 +46,6 @@ export default function SearchBar({}: Props) {
 
   React.useEffect(() => {
     console.clear();
-    console.log({locationData})
   }, [locationData]);
 
   return (

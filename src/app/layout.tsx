@@ -12,14 +12,20 @@ export const metadata: Metadata = {
   applicationName: "Krash-weather app",
   authors: [{
     url: "https://twitter.com/orashus",
-    name: "Rash"
+    name: "Rash Edmund"
   }],
   appLinks: {
     web: {
       url: APP_URL,
       should_fallback: true,
     },
-  }
+  },
+  openGraph: {
+    type: 'website',
+    description: 'weather web application',
+    siteName: 'Krash weather',
+    title: 'Krash Weather',
+  },
 };
 
 export default function RootLayout({
@@ -31,7 +37,6 @@ export default function RootLayout({
     <WeatherContextProvider>
       <html lang="en">
         <head>
-          <link rel="icon" href="/favicon.png" />
           <meta
             httpEquiv="Content-Security-Policy"
             content="upgrade-insecure-requests"

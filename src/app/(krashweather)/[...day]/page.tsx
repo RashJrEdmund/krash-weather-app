@@ -2,7 +2,7 @@
 
 import React from "react";
 
-type Props = {};
+interface Props {};
 
 export default function Day({}: Props) {
   return <p />;

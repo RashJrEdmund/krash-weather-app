@@ -28,7 +28,7 @@ const StyledNav = styled.nav`
   }
 `;
 
-type Props = {};
+interface Props {};
 
 export default function NavBar({}: Props) {
   const { setShowMenu } = useWeatherContext();
