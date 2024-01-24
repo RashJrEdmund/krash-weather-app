@@ -37,7 +37,6 @@ export default function RootLayout({
     <WeatherContextProvider>
       <html lang="en">
         <head>
-          <link rel="icon" href="/favicon.png" />
           <meta
             httpEquiv="Content-Security-Policy"
             content="upgrade-insecure-requests"
