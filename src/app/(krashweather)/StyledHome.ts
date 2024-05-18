@@ -7,10 +7,10 @@ const StyledHome = styled.main<StyledProps>`
   background-color: transparent;
   width: min(98%, var(--max-app-width));
   height: fit-content;
-  min-height: var(--min-app-height);
+  min-height: 50vh;
   display: grid;
   grid-template-columns: 25% 1fr 25%;
-  margin: 2rem auto 1rem;
+  margin: 0 auto;
 
   .main_left_col {
     border-radius: var(--app-border) 0 0 var(--app-border);
@@ -18,7 +18,7 @@ const StyledHome = styled.main<StyledProps>`
     background-color: var(--side-bg);
     padding: 10px;
     margin: 0 10px 0 0;
-    min-height: 90vh;
+    min-height: var(--min-app-height);
   }
 
   .main_right_col {
@@ -27,7 +27,7 @@ const StyledHome = styled.main<StyledProps>`
     background-color: var(--side-bg);
     padding: 10px;
     margin: 0 0 0 10px;
-    min-height: 90vh;
+    min-height: var(--min-app-height);
   }
 
   @media only screen and (max-width: 950px) {

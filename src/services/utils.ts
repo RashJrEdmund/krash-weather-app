@@ -1,5 +1,8 @@
 "use client";
 
+import { type ReadonlyURLSearchParams } from "next/navigation";
+import { SEARCH_PARAMS } from "./constants";
+
 const logText = (data: any) => {
   const { clear, log } = console;
   clear();
@@ -30,9 +33,30 @@ const removeSecondsFromTime = (dt_txt: string) => {
   return time_array.join(":");
 }
 
+/**
+ * receive an instance of NextJs' useSearchParams hook, and returns an instance the URLSearchParams JS API
+ * reads allowed search params from an array SEARCH_PARAMS in the './constants.ts' file
+ * and ensures only those params are read and used.
+ * @param ReadonlyURLSearchParams
+ * @returns URLSearchParams
+*/
+const getAndFormSearchQuery = (searchParams: ReadonlyURLSearchParams): URLSearchParams => {
+  const searchQuery = new URLSearchParams();
+
+  for (const q of SEARCH_PARAMS) {
+    const value = searchParams.get(q);
+    if (value) {
+      searchQuery.set(q, value);
+    }
+  }
+
+  return searchQuery;
+}
+
 export {
   logText,
   getCurrentDate,
   getCurrentWeekDay,
   removeSecondsFromTime,
+  getAndFormSearchQuery,
 }

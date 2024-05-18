@@ -21,12 +21,12 @@ export const SearchIcon = styled(LuSearch)`
 `;
 
 export const LocationIcon = styled(MdLocationOn)`
-  color: #ffba51;
+  color: var(--app-gold);
   font-size: 20px;
 `;
 
 export const MenuIcon = styled(MdMenu)`
-  color: #ffba51;
+  color: var(--app-gold);
   font-size: 40px;
   cursor: pointer;
 
@@ -57,22 +57,22 @@ export const LoadingIcon = styled(AiOutlineLoading3Quarters)`
 `;
 
 export const SettingsIcon = styled(IoMdSettings)`
-  color: #ffba51;
+  color: var(--app-gold);
   font-size: 20px;
 `;
 
 export const UserIcon = styled(FaUser)`
-  color: #ffba51;
+  color: var(--app-gold);
   font-size: 20px;
 `;
 
 export const NewsIcon = styled(BiNews)`
-  color: #ffba51;
+  color: var(--app-gold);
   font-size: 20px;
 `;
 
 export const BackIcon = styled(BiSolidExit)`
-  color: #ffba51;
+  color: var(--app-gold);
   font-size: 20px;
   transform: rotate(180deg);
 `;

@@ -8,6 +8,8 @@ const StyledWeather = styled.div`
   display: flex;
   flex-wrap: nowrap;
   align-items: flex-start;
+  justify-content: center;
+  margin: 3rem 0 0;
 
   & * {
     display: flex;
@@ -16,6 +18,7 @@ const StyledWeather = styled.div`
   }
 
   .weather_col_1 {
+    flex: 1;
     width: 100%;
 
     .location {
@@ -23,7 +26,6 @@ const StyledWeather = styled.div`
       font-size: 20px;
       font-weight: 600;
       letter-spacing: 2px;
-      margin: 10px 0 4rem;
       white-space: nowrap;
       flex-direction: row;
       gap: 5px;
@@ -33,6 +35,7 @@ const StyledWeather = styled.div`
 
     .desc_img {
       width: 100%;
+      padding: 0 0 0 4px;
 
       .description {
         margin: 15px 0;
@@ -53,21 +56,25 @@ const StyledWeather = styled.div`
         }
 
         .exp {
-          color: #ffba51;
+          color: var(--app-gold);
         }
+      }
+
+      img {
+        object-fit: cover;
       }
     }
   }
 
   .weather_col_2 {
+    flex: 1;
     width: 100%;
-    /* background-color: gray; */
 
     .temp {
       font-size: 15px;
       margin: 15px 0;
       font-weight: 600;
-      color: #ffba51;
+      color: var(--app-gold);
 
       span {
         font-size: 100px;

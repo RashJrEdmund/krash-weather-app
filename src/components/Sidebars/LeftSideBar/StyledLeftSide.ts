@@ -29,7 +29,7 @@ const StyledLeftSide = styled(StyledSideBar)`
       }
 
       &.current_time {
-        background: linear-gradient(to right, transparent, #00800005, green);
+        background: linear-gradient(to right, transparent, #00800005, 00800005);
         border-radius: 0 6px 6px 0;
       }
 

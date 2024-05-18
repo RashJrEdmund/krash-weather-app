@@ -10,7 +10,7 @@ import {
 } from "@/components/atoms/Icons";
 import { useWeatherContext } from "@/context/store";
 
-type Props = { setIndexSide: any };
+interface Props { setIndexSide: any };
 
 export default function UserSidebar({ setIndexSide }: Props) {
   const {

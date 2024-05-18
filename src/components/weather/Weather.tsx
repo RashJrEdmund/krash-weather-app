@@ -1,12 +1,11 @@
 "use client";
 
 import { useWeatherContext } from "@/context/store";
-import React, { useEffect, useState } from "react";
 import StyledWeather from "./StyledWeather";
 import Image from "next/image";
 import { LocationIcon } from "../atoms/Icons";
 
-type Props = {};
+interface Props {};
 
 export default function Weather({ }: Props) {
   const { currentWeather, location } = useWeatherContext();

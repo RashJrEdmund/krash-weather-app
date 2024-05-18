@@ -10,8 +10,9 @@
   --app-border: 10px;
   --side-bg: #1d2432;
   --main-gold-color: #feb949;
+  --app-gold: #ffba51;
   --max-app-width: 1500px;
-  --min-app-height: 50vh;
+  --min-app-height: min(90vh, 700px);
 }
 
 @media only screen and (max-width: 600px) {
@@ -28,17 +29,6 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
 */
 
 * {
@@ -51,8 +41,12 @@ body {
 body {
   background-color: #1d243281;
   margin: 0;
-  padding: 0;
+  padding: 1rem 0;
   color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 button {

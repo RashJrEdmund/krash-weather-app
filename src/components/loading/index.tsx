@@ -1,18 +1,20 @@
 "use client";
 
-import WeatherAPPGaurd from "@/HOC/WeatherAPP";
 import { SlideData } from "@/images";
 import { APP_VERSION } from "@/services/constants";
 import { StyledProps } from "@/types";
 import styled from "@emotion/styled";
 
-const StyledLanding = styled.main<StyledProps>`
+const StyledLoading = styled.main<StyledProps>`
   background: linear-gradient(to bottom, #00000070, #00000070, #00000070),
     url(${({ url }) => url});
   background-position: center;
   background-size: cover;
-  width: 100vw;
-  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -78,9 +80,9 @@ const StyledLanding = styled.main<StyledProps>`
   }
 `;
 
-const Home = () => {
+export default function Loading() {
   return (
-    <StyledLanding url={SlideData[0]}>
+    <StyledLoading url={SlideData[0]}>
       <section className="loader">
         <span className="versoin">version : {APP_VERSION}</span>
         <div className="text_holder">
@@ -90,8 +92,7 @@ const Home = () => {
 
         <span className="loading_text">Loading...</span>
       </section>
-    </StyledLanding>
+    </StyledLoading>
   );
 };
 
-export default WeatherAPPGaurd(Home);
