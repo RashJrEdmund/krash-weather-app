@@ -1,13 +1,18 @@
 "use client";
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import StyledSubSide from "./StyledSubSide";
 import { UserIcon } from "@/components/atoms/Icons";
 import { useWeatherContext } from "@/context/store";
+import { useRouter, useSearchParams } from "next/navigation";
+import { getAndFormSearchQuery } from "@/services/utils";
 
 interface Props { setIndexSide: any };
 
 export default function IndexSide({ setIndexSide }: Props) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const {
     _5_days,
     currentDay,
@@ -18,8 +23,20 @@ export default function IndexSide({ setIndexSide }: Props) {
   const changeDay = (day: string) => {
     displayAlert(`Weather set for ${day}`);
 
-    setCurrentDAy(day);
+    const urlSearchParams = getAndFormSearchQuery(searchParams);
+
+    urlSearchParams.set('day', day);
+
+    router.replace('?' + urlSearchParams.toString());
   };
+
+  useEffect(() => {
+    const day = searchParams.get('day');
+
+    if (day && _5_days.includes(day)) {
+      setCurrentDAy(day);
+    }
+  }, [_5_days, searchParams, setCurrentDAy]);
 
 
   return (

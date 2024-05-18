@@ -10,6 +10,7 @@
   --app-border: 10px;
   --side-bg: #1d2432;
   --main-gold-color: #feb949;
+  --app-gold: #ffba51;
   --max-app-width: 1500px;
   --min-app-height: min(90vh, 700px);
 }

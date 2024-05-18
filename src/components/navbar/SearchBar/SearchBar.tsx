@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { useState, useEffect } from "react";
 import { API_KEY } from "../../../services/constants";
 import Location from "./Location";
 import StyledSearchBar from "./StyledSearchBar";
@@ -8,12 +8,18 @@ import { SearchIcon } from "../../atoms/Icons";
 import getData from "@/api/GetData";
 import { useWeatherContext } from "@/context/store";
 import { Overlay } from "@/components/atoms/Atoms";
+import { useRouter, useSearchParams } from "next/navigation";
+import { getAndFormSearchQuery } from "@/services/utils";
 
-interface Props {};
-export default function SearchBar({}: Props) {
-  const [locationData, setLocationData] = React.useState<any>(null);
-  const [searchVal, setSearchVal] = React.useState<string>("");
-  const [loading, setLoading] = React.useState<boolean>(false);
+interface Props { };
+export default function SearchBar({ }: Props) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const [locationData, setLocationData] = useState<any>(null);
+  const [searchVal, setSearchVal] = useState<string>(searchParams.get('search') || '');
+  const [loading, setLoading] = useState<boolean>(false);
+
 
   const { showOverlay, setShowOverlay } = useWeatherContext();
 
@@ -35,7 +41,15 @@ export default function SearchBar({}: Props) {
 
   // using a debounce search. waiting 900ms
 
-  React.useEffect(() => {
+  useEffect(() => {
+    const searchQuery = getAndFormSearchQuery(searchParams);
+
+    searchQuery.set('search', searchVal);
+
+    if (!searchVal.trim()) searchQuery.delete('search');
+    
+    router.replace('?' + searchQuery.toString());
+
     const intId = setTimeout(() => {
       searchVal.trim() && setShowOverlay(true); // to ensure that there actually is avalue being fetched
       handleFetch();
@@ -44,8 +58,9 @@ export default function SearchBar({}: Props) {
     return () => clearInterval(intId);
   }, [searchVal]);
 
-  React.useEffect(() => {
-    console.clear();
+  useEffect(() => {
+    // console.clear();
+    // console.log(searchParams.toString())
   }, [locationData]);
 
   return (

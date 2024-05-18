@@ -34,9 +34,9 @@ const StyledBase = styled.section`
 
     .magnetude {
       border-radius: 5px;
-      box-shadow: 0 0 10px #ffba51;
+      box-shadow: 0 0 10px var(--app-gold);
       padding: 10px 15px;
-      color: #ffba51;
+      color: var(--app-gold);
       width: 100%;
       margin: 10px auto;
       display: flex;

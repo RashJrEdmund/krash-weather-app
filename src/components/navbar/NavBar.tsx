@@ -15,7 +15,7 @@ const StyledNav = styled.nav`
 
   .logo {
     .krash_text {
-      color: #ffba51;
+      color: var(--app-gold);
       font-size: 25px;
       font-weight: 600;
     }

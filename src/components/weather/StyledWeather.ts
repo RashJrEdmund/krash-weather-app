@@ -56,7 +56,7 @@ const StyledWeather = styled.div`
         }
 
         .exp {
-          color: #ffba51;
+          color: var(--app-gold);
         }
       }
 
@@ -74,7 +74,7 @@ const StyledWeather = styled.div`
       font-size: 15px;
       margin: 15px 0;
       font-weight: 600;
-      color: #ffba51;
+      color: var(--app-gold);
 
       span {
         font-size: 100px;
